@@ -241,6 +241,7 @@ D:\HARSH\Project Online Shop\OnlineShopping\OnlineShopping\bin\EntityFramework.S
 D:\HARSH\Project Online Shop\OnlineShopping\OnlineShopping\bin\System.Web.Cors.dll
 D:\HARSH\Project Online Shop\OnlineShopping\OnlineShopping\bin\System.Web.Http.Cors.dll
 D:\HARSH\Project Online Shop\OnlineShopping\OnlineShopping\bin\System.Web.Http.Cors.xml
+D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\obj\Debug\OnlineShopping.csprojAssemblyReference.cache
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\bin\Microsoft.DiaSymReader.Native.x86.dll
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\bin\Microsoft.DiaSymReader.Native.amd64.dll
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\bin\OnlineShopping.dll.config
@@ -479,7 +480,6 @@ D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\bin\System.Web.WebP
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\bin\System.Web.WebPages.Razor.xml
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\bin\Antlr3.Runtime.pdb
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\obj\Debug\OnlineShopping.csprojAssemblyReference.cache
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\obj\Debug\OnlineShopping.csproj.CopyComplete
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\obj\Debug\OnlineShopping.dll
 D:\HARSH\ProjectOnlineShopping\OnlineShopping\OnlineShopping\obj\Debug\OnlineShopping.pdb

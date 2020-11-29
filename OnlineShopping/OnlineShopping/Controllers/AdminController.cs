@@ -12,7 +12,7 @@ namespace OnlineShopping.Controllers
 {
     public class AdminController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
         // Fetching Retailers from the User Tables
         [HttpGet]
         public IHttpActionResult GetRetailer()

@@ -13,7 +13,7 @@ namespace OnlineShopping.Controllers
 {
     public class OTPController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
         [HttpGet]
         public IHttpActionResult VerifyEmail(string email)

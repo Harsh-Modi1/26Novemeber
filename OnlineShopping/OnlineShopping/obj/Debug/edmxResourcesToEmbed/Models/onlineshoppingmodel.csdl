@@ -33,6 +33,7 @@
     <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__6D0D32F4" FromRole="Categories" ToRole="Product" />
+    <NavigationProperty Name="UnnapprovedProducts" Relationship="Self.FK__Unnapprov__Categ__17F790F9" FromRole="Categories" ToRole="UnnapprovedProducts" />
   </EntityType>
   <EntityType Name="Image">
     <Key>
@@ -103,10 +104,12 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedBy" Type="Int32" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="RetailerID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__ProductID__03F0984C" FromRole="Product" ToRole="Cart" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__6D0D32F4" FromRole="Product" ToRole="Categories" />
     <NavigationProperty Name="Images" Relationship="Self.FK__Images__ProductI__6FE99F9F" FromRole="Product" ToRole="Images" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__02084FDA" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="UserTable" Relationship="Self.FK__Product__Retaile__18EBB532" FromRole="Product" ToRole="UserTable" />
     <NavigationProperty Name="WishLists" Relationship="Self.FK__WishList__Produc__05D8E0BE" FromRole="Product" ToRole="WishList" />
   </EntityType>
   <EntityType Name="sysdiagram">
@@ -118,6 +121,26 @@
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UnnapprovedProduct">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="Brand" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="ProductPrice" Type="Single" Nullable="false" />
+    <Property Name="InStock" Type="Boolean" Nullable="false" />
+    <Property Name="RetailerID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Unnapprov__Categ__17F790F9" FromRole="UnnapprovedProducts" ToRole="Categories" />
+    <NavigationProperty Name="UserTable" Relationship="Self.FK__Unnapprov__Retai__17036CC0" FromRole="UnnapprovedProducts" ToRole="UserTable" />
   </EntityType>
   <EntityType Name="UserTable">
     <Key>
@@ -138,6 +161,8 @@
     <NavigationProperty Name="MyOrders" Relationship="Self.FK__MyOrder__UserID__01142BA1" FromRole="UserTable" ToRole="MyOrder" />
     <NavigationProperty Name="NotificationTables" Relationship="Self.FK__Notificat__Admin__571DF1D5" FromRole="UserTable" ToRole="NotificationTable" />
     <NavigationProperty Name="OTPs" Relationship="Self.FK__OTP__UserID__06CD04F7" FromRole="UserTable" ToRole="OTP" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Retaile__18EBB532" FromRole="UserTable" ToRole="Product" />
+    <NavigationProperty Name="UnnapprovedProducts" Relationship="Self.FK__Unnapprov__Retai__17036CC0" FromRole="UserTable" ToRole="UnnapprovedProducts" />
     <NavigationProperty Name="WishLists" Relationship="Self.FK__WishList__UserID__04E4BC85" FromRole="UserTable" ToRole="WishList" />
   </EntityType>
   <EntityType Name="WishList">
@@ -194,6 +219,18 @@
         <PropertyRef Name="CategoryID" />
       </Principal>
       <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Unnapprov__Categ__17F790F9">
+    <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="UnnapprovedProducts" Type="Self.UnnapprovedProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="UnnapprovedProducts">
         <PropertyRef Name="CategoryID" />
       </Dependent>
     </ReferentialConstraint>
@@ -270,6 +307,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Product__Retaile__18EBB532">
+    <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTable">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="RetailerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__WishList__Produc__05D8E0BE">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="WishList" Type="Self.WishList" Multiplicity="*" />
@@ -279,6 +328,18 @@
       </Principal>
       <Dependent Role="WishList">
         <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Unnapprov__Retai__17036CC0">
+    <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+    <End Role="UnnapprovedProducts" Type="Self.UnnapprovedProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTable">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UnnapprovedProducts">
+        <PropertyRef Name="RetailerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -294,7 +355,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DbonlineshoppingEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DbonlineshoppingEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AddressTables" EntityType="Self.AddressTable" />
     <EntitySet Name="Carts" EntityType="Self.Cart" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -305,6 +366,7 @@
     <EntitySet Name="OTPs" EntityType="Self.OTP" />
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="UnnapprovedProducts" EntityType="Self.UnnapprovedProduct" />
     <EntitySet Name="UserTables" EntityType="Self.UserTable" />
     <EntitySet Name="WishLists" EntityType="Self.WishList" />
     <AssociationSet Name="FK__AddressTa__UserI__07C12930" Association="Self.FK__AddressTa__UserI__07C12930">
@@ -322,6 +384,10 @@
     <AssociationSet Name="FK__Product__Categor__6D0D32F4" Association="Self.FK__Product__Categor__6D0D32F4">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Unnapprov__Categ__17F790F9" Association="Self.FK__Unnapprov__Categ__17F790F9">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="UnnapprovedProducts" EntitySet="UnnapprovedProducts" />
     </AssociationSet>
     <AssociationSet Name="FK__Images__ProductI__6FE99F9F" Association="Self.FK__Images__ProductI__6FE99F9F">
       <End Role="Product" EntitySet="Products" />
@@ -347,65 +413,21 @@
       <End Role="UserTable" EntitySet="UserTables" />
       <End Role="OTP" EntitySet="OTPs" />
     </AssociationSet>
+    <AssociationSet Name="FK__Product__Retaile__18EBB532" Association="Self.FK__Product__Retaile__18EBB532">
+      <End Role="UserTable" EntitySet="UserTables" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
     <AssociationSet Name="FK__WishList__Produc__05D8E0BE" Association="Self.FK__WishList__Produc__05D8E0BE">
       <End Role="Product" EntitySet="Products" />
       <End Role="WishList" EntitySet="WishLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Unnapprov__Retai__17036CC0" Association="Self.FK__Unnapprov__Retai__17036CC0">
+      <End Role="UserTable" EntitySet="UserTables" />
+      <End Role="UnnapprovedProducts" EntitySet="UnnapprovedProducts" />
     </AssociationSet>
     <AssociationSet Name="FK__WishList__UserID__04E4BC85" Association="Self.FK__WishList__UserID__04E4BC85">
       <End Role="UserTable" EntitySet="UserTables" />
       <End Role="WishList" EntitySet="WishLists" />
     </AssociationSet>
-    <FunctionImport Name="RegisterUser">
-      <Parameter Name="FirstName" Mode="In" Type="String" />
-      <Parameter Name="LastName" Mode="In" Type="String" />
-      <Parameter Name="Email" Mode="In" Type="String" />
-      <Parameter Name="MobileNumber" Mode="In" Type="String" />
-      <Parameter Name="Password" Mode="In" Type="String" />
-      <Parameter Name="Role" Mode="In" Type="String" />
-      <Parameter Name="Status" Mode="In" Type="String" />
-      <Parameter Name="Gender" Mode="In" Type="String" />
-      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
-    </FunctionImport>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DbonlineshoppingModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DbonlineshoppingModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
 </Schema>

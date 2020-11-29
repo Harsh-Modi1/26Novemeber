@@ -18,6 +18,7 @@ namespace OnlineShopping.Models
         public Category()
         {
             this.Products = new HashSet<Product>();
+            this.UnnapprovedProducts = new HashSet<UnnapprovedProduct>();
         }
     
         public int CategoryID { get; set; }
@@ -25,5 +26,7 @@ namespace OnlineShopping.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnnapprovedProduct> UnnapprovedProducts { get; set; }
     }
 }

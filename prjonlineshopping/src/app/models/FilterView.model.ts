@@ -1,9 +1,9 @@
 export class FilterView {
     constructor() {
-        this.SortBy = null;
-        this.Search = null;
-        this.MaxPrice = 0;
-        this.MinPrice = 0;
+        this.SortBy = '';
+        this.Search = '';
+        this.MaxPrice = null;
+        this.MinPrice = null;
     }
     SortBy: string;
     Search: string;

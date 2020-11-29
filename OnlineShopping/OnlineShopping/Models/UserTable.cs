@@ -22,6 +22,8 @@ namespace OnlineShopping.Models
             this.MyOrders = new HashSet<MyOrder>();
             this.NotificationTables = new HashSet<NotificationTable>();
             this.OTPs = new HashSet<OTP>();
+            this.Products = new HashSet<Product>();
+            this.UnnapprovedProducts = new HashSet<UnnapprovedProduct>();
             this.WishLists = new HashSet<WishList>();
         }
     
@@ -46,6 +48,10 @@ namespace OnlineShopping.Models
         public virtual ICollection<NotificationTable> NotificationTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OTP> OTPs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnnapprovedProduct> UnnapprovedProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WishList> WishLists { get; set; }
     }

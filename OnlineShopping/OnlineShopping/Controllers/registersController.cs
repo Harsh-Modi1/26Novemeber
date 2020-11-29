@@ -14,7 +14,7 @@ namespace OnlineShopping.Controllers
 {
     public class registersController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
 
         // POST: api/registers
@@ -61,7 +61,8 @@ namespace OnlineShopping.Controllers
             {
                 IsValidUser = isValidUser,
                 UserId = user != null ? user.UserID : 0,
-                UserName = user != null ? user.FirstName + " " + user.LastName : ""
+                UserName = user != null ? user.FirstName + " " + user.LastName : "",
+                Role = user.Role
             };
             return Ok(model);
         }

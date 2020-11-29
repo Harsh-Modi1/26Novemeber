@@ -4,30 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="36c820ed00074a9cb00c63562356fc33" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="DbonlineshoppingModel.AddressTable" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.Cart" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.Category" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.Image" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.MyOrder" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.NotificationTable" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.OrderDetail" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.OTP" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.Product" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.sysdiagram" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.UserTable" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbonlineshoppingModel.WishList" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+      <Diagram DiagramId="6f92f068e8c544d994bffa0a70081134" Name="Diagram1">
+        <EntityTypeShape EntityType="DbonlineshoppingModel.AddressTable" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.Cart" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.Category" Width="1.5" PointX="3.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.Image" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.MyOrder" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.NotificationTable" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.OrderDetail" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.OTP" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.Product" Width="1.5" PointX="6" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.UnnapprovedProduct" Width="1.5" PointX="8" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.UserTable" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbonlineshoppingModel.WishList" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__AddressTa__UserI__07C12930" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__Cart__ProductID__03F0984C" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__Cart__UserID__02FC7413" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__Product__Categor__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="DbonlineshoppingModel.FK__Unnapprov__Categ__17F790F9" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__Images__ProductI__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__MyOrder__UserID__01142BA1" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__OrderDeta__Order__778AC167" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__Notificat__Admin__571DF1D5" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__OrderDeta__Produ__02084FDA" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__OTP__UserID__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="DbonlineshoppingModel.FK__Product__Retaile__18EBB532" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__WishList__Produc__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="DbonlineshoppingModel.FK__Unnapprov__Retai__17036CC0" ManuallyRouted="false" />
         <AssociationConnector Association="DbonlineshoppingModel.FK__WishList__UserID__04E4BC85" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

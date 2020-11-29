@@ -605,13 +605,10 @@
     <Compile Include="Models\ProductCompare.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\register.cs" />
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UnnapprovedProduct.cs">
       <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserTable.cs">

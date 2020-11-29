@@ -3,50 +3,61 @@
     <div class="col-md-3">
       <div class="form-group">
         <label><b>Product Code</b></label>
-        <input type="text" name="ProductCode" [(ngModel)]="prod.ProductCode" />
+        <input #ProductCode type="text" name="ProductCode" [(ngModel)]="prod.ProductCode" />
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
         <label><b>Product Name</b></label>
-        <input type="text" name="ProductName" [(ngModel)]="prod.ProductName" />
+        <input #ProductName type="text" name="ProductName" [(ngModel)]="prod.ProductName" />
       </div>
     </div>
   </div>
   <div class="form-group">
     <label><b>Category Name</b></label>
-    <select name="CategoryID" [(ngModel)]="prod.CategoryID">
+    <select #CategoryID name="CategoryID" [(ngModel)]="prod.CategoryID">
       <option value="0">Select Category</option>
       <option *ngFor="let Category of categorylist" value="{{Category.CategoryID}}">{{Category.CategoryName}}</option>
     </select>
   </div>
   <div class="form-group">
     <label><b>Product Description</b></label>
-    <input type="text" name="ProductDescription" [(ngModel)]="prod.ProductDescription" />
+    <input #ProductDescription type="text" name="ProductDescription" [(ngModel)]="prod.ProductDescription" />
   </div>
   <div class="form-group">
     <label><b>Product Price</b></label>
-    <input type="text" name="ProductPrice" [(ngModel)]="prod.ProductPrice" />
+    <input #ProductPrice type="text" name="ProductPrice" [(ngModel)]="prod.ProductPrice" />
   </div>
   <div class="form-group">
     <label><b>Brand</b></label>
-    <input type="text" name="Brand" [(ngModel)]="prod.Brand" />
+    <input #Brand type="text" name="Brand" [(ngModel)]="prod.Brand" />
   </div>
   <div class="form-group">
     <label><b>Quantity</b></label>
-    <input type="number" name="Quantity" [(ngModel)]="prod.Quantity" />
+    <input #Quantity type="number" name="Quantity" [(ngModel)]="prod.Quantity" />
   </div>
   <div class="form-group">
     <label><b>Stock</b></label>&nbsp;
-    <input type="radio" name="Instock" value="true" [(ngModel)]="prod.InStock" />&nbsp;InStock&nbsp;
-    <input type="radio" name="Instock" value="false" [(ngModel)]="prod.InStock" />&nbsp;OutOfStock
+    <input #Instock type="radio" name="Instock" value="true" [(ngModel)]="prod.InStock" />&nbsp;InStock&nbsp;
+    <input #Outstock type="radio" name="Outstock" value="false" [(ngModel)]="prod.InStock" />&nbsp;OutOfStock
   </div>
+  <label>Upload Image</label>
+  <img [src]="imageUrl"  style="width:250px;height:200px">
+  <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+  <label>Upload Image</label>
+  <img [src]="imageUrl1"  style="width:250px;height:200px">
+  <input type="file" #Image1 accept="image/*" (change)="handleFileInput1($event.target.files)">
+  <label>Upload Image</label>
+  <img [src]="imageUrl2"  style="width:250px;height:200px">
+  <input type="file" #Image2 accept="image/*" (change)="handleFileInput2($event.target.files)">
 
-  <button *ngIf=" prod.ProductID != 0" class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Product
-    Images</button>
+
+  <!-- <button *ngIf=" prod.ProductID != 0" class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Product
+    Images</button> -->
 
   <div class="form-group">
-    <button (click)="SaveProduct()">{{addUpdate}} Product</button>
+    <button (click)="SaveProduct(ProductCode,ProductName,CategoryID,ProductDescription,ProductPrice,
+    Brand,Quantity,Instock,Outstock,Image,Image1,Image2)">{{addUpdate}} Product</button>
   </div>
 </form>
 <hr>

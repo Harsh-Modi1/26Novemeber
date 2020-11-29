@@ -14,6 +14,8 @@ import { RetailerviewComponent } from './retailerview/retailerview.component';
 import { RetailerdashboardComponent } from './retailerdashboard/retailerdashboard.component';
 import { CartComponent } from './components/shared/cart/cart.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
+// import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { ProductmanagementComponent } from './productmanagement/productmanagement.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,7 +32,9 @@ const routes: Routes = [
   { path: 'adminregistration', component: AdminregistrationComponent },
   { path: 'retailercrud', component: RetailercrudComponent },
   { path: 'retailerview', component: RetailerviewComponent },
-  { path: 'retailerdashboard', component: RetailerdashboardComponent }
+  { path: 'retailerdashboard', component: RetailerdashboardComponent },
+  // {path: '**', component: PagenotfoundComponent},
+  {path: 'productmanagement', component: ProductmanagementComponent }
 ];
 
 @NgModule({

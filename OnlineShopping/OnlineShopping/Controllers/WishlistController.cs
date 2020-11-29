@@ -10,7 +10,7 @@ namespace OnlineShopping.Controllers
 {
     public class WishlistController : ApiController
     {
-        DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
         [HttpGet]
         public IHttpActionResult WishlistProduct(int userId)

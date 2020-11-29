@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Products } from '../models/Products.model';
 import { productservice } from '../services/productservice';
 import { Router } from '@angular/router';
-import { CartModel, UpdateCartModel } from '../models/Cart.model';
-
+import { CartModel } from '../models/Cart.model';
 
 @Component({
   selector: 'app-viewdetail',
@@ -12,8 +11,7 @@ import { CartModel, UpdateCartModel } from '../models/Cart.model';
 })
 export class ViewdetailComponent implements OnInit {
   product: Products = new Products();
-  cartModel: CartModel[] = new Array<CartModel>();
-  updateCartModel: UpdateCartModel = new UpdateCartModel();
+  cartQuantity: number = 1;
   constructor(private prodservice: productservice, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,7 +22,6 @@ export class ViewdetailComponent implements OnInit {
   }
 
   AddToCart(productModel) {
-    debugger;
     if (!sessionStorage.getItem('userId')) {
       this.router.navigate(['login']);
       alert('Login first to add to Cart.');
@@ -33,17 +30,22 @@ export class ViewdetailComponent implements OnInit {
     let model = {
       ProductID: productModel.ProductID,
       TotalPrice: productModel.ProductPrice,
-      Quantity: 1,
+      Quantity: this.cartQuantity,
       UserID: sessionStorage.getItem('userId')
     };
     this.prodservice.AddToCart(model).subscribe((response: any) => {
-      if (response == "Success") {
+      if (response == 'Success') {
         alert('Product Successfully added to cart.');
+      }
+      else if (response == 'ProductID Already Exists in Cart.') {
+        alert(response);
+      }
+      else {
+        alert(response);
       }
     });
   }
   AddToWishlist(productModel) {
-    debugger;
     if (!sessionStorage.getItem('userId')) {
       this.router.navigate(['login']);
       alert('Login first to add to Wishlist.');
@@ -54,49 +56,12 @@ export class ViewdetailComponent implements OnInit {
       UserID: sessionStorage.getItem('userId')
     };
     this.prodservice.AddToWishlist(model).subscribe((response: any) => {
-      if (response == "Success") {
+      if (response == 'Success') {
         alert('Product Successfully added to Wishlist.');
       }
-      else{
+      else {
         alert('Product already Present in the WishList..')
       }
     });
   }
-  // onAddQuantity(product) {
-  //   product.Quantity = product.Quantity + 1;
-  //   product.TotalPrice = product.Quantity * product.ProductPrice;
-  //   this.updateCartModel.ProductID = product.ProductID;
-  //   this.updateCartModel.UserID = Number(sessionStorage.getItem('userId'));
-  //   this.updateCartModel.Quantity = product.Quantity;
-  //   this.updateCartModel.TotalPrice = product.TotalPrice;
-  //   this.prodservice.UpdateCart(this.updateCartModel).subscribe((response: any) => {
-  //     if (response == "Success") {
-  //       alert("Cart updated Successfully");
-  //     }
-  //     else {
-  //       alert(response);
-  //     }
-  //   });
-  // }
-
-  // onRemoveQuantity(product) {
-  //   if (product.Quantity > 1) {
-  //     product.Quantity = product.Quantity - 1;
-  //     product.TotalPrice = product.Quantity * product.ProductPrice;
-  //     this.updateCartModel.ProductID = product.ProductID;
-  //     this.updateCartModel.UserID = Number(sessionStorage.getItem('userId'));
-  //     this.updateCartModel.Quantity = product.Quantity;
-  //     this.updateCartModel.TotalPrice = product.TotalPrice;
-  //     this.prodservice.UpdateCart(this.updateCartModel).subscribe((response: any) => {
-  //       if (response == "Success") {
-  //         // alert("Cart updated Successfully");
-  //       }
-  //       else {
-  //         alert(response);
-  //       }
-  //     });
-  //   }
-  // }
-
-
 }

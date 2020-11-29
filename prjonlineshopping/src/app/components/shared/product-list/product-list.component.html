@@ -4,41 +4,49 @@
       <div class="card-header">
         <strong>Filters</strong></div>
       <div class="card-body">
-        <form>
-          <div class="form-group">
-            <label for="from">From</label>
-            <input type="number" id="from" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="to">To</label>
-            <input type="number" id="to" class="form-control">
-          </div>
-          <button class="btn-btn-primary btn-block">Filter By Price</button>
-        </form>
+        <div class="form-group">
+          <label for="from">From</label>
+          <input type="number" id="from" [(ngModel)]="filterView.MinPrice" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="to">To</label>
+          <input type="number" id="to" [(ngModel)]="filterView.MaxPrice" class="form-control">
+        </div>
+        <button class="btn-btn-primary btn-block" (click)="GetUserProducts(filterView);">Filter By Price</button>
       </div>
     </div>
   </div>
 
   <div class="col-md-8">
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="Search for Products " style="width:300px"
-        [(ngModel)]="searchTerm" />
-    </div>
-    
-<div class="row">
-  <div class="col-6 form-group">
-    <label>SortBy</label>
-    <div class="margin">
-      <select class="form-control" id="dropStatus" name="dropStatus" formControlName="SortBy">
-        <option value="Ascending">Ascending</option>
-        <option value="Descending">Descending</option>
-      </select>
-    </div>
-  </div>
-</div>
-    <a class="p-2 text-dark btn btn-outline-primary" href="compare">Go to Compare Products</a>
     <div class="row">
-      <div class="col-md-4" *ngFor="let productItem of productList | productfilter: searchTerm ;">
+      <div class="col-md-5">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search By Name/Description"
+            [(ngModel)]="filterView.Search" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <select [(ngModel)]='filterView.SortBy' style="height: 36px;">
+            <option value="">Sort By</option>
+            <option value="asc">Product Name Ascending</option>
+            <option value="desc">Product Name Descending</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <button type="button" class="btn btn-sm btn-outline-secondary" style="height: 36px;"
+            (click)="GetUserProducts(filterView);">Filter</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" style="height: 36px; margin-left: 10px;"
+            (click)="ClearFilter();">Clear Filter</button>
+        </div>
+      </div>
+    </div>
+    <a class="p-2 text-dark btn btn-outline-primary" href="compare" style="margin-bottom: 15px;">Go to Compare
+      Products</a>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let productItem of products">
         <div class="card mb-4 shadow-sm">
           <p class="card-text" style="text-align: center;color: red;">
             <strong>{{productItem.ProductName}}</strong>
@@ -65,7 +73,3 @@
     </div>
   </div>
 </div>
-
-
-
-

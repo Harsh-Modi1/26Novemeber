@@ -17,12 +17,13 @@ export class CartComponent implements OnInit {
   deletecartid: number;
   myOrderDetailModel: MyOrderModel = new MyOrderModel();
 
-  constructor(private router: Router,private prodservice: productservice, private orderservice: Orderservice) { }
+  constructor(private router: Router, private prodservice: productservice, private orderservice: Orderservice) { }
 
   ngOnInit(): void {
     this.getcartproduct();
   }
-  getcartproduct(){
+
+  getcartproduct() {
     let userId = Number(sessionStorage.getItem('userId'));
     this.prodservice.getCartProduct(userId).subscribe((data: any) => {
       this.cartModel = data;
@@ -66,6 +67,7 @@ export class CartComponent implements OnInit {
       }
       else {
         alert(response);
+        this.getcartproduct();
       }
     });
   }
@@ -74,7 +76,7 @@ export class CartComponent implements OnInit {
     this.prodservice.RemovefromCart(this.deletecartid = id).subscribe((response: any) => {
       if (response == 'Success') {
         alert('Product successfully removed from Cart');
-    this.getcartproduct();
+        this.getcartproduct();
       }
     });
   }

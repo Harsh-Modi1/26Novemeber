@@ -14,7 +14,7 @@ namespace OnlineShopping.Controllers
 {
     public class CartsController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
         #region Cart
         [HttpGet]
@@ -22,7 +22,7 @@ namespace OnlineShopping.Controllers
         {
             var products = db.Carts.Where(w => w.UserID == userId).Select(s => new CartModel()
             {
-                CartID=s.CartID,
+                CartID = s.CartID,
                 ProductDescription = s.Product.ProductDescription,
                 ProductCode = s.Product.ProductCode,
                 ProductName = s.Product.ProductName,
@@ -39,36 +39,53 @@ namespace OnlineShopping.Controllers
         {
             var isDuplicateCart = db.Carts.Where(w => w.ProductID == cart.ProductID
             && w.UserID == cart.UserID).FirstOrDefault();
-            if (isDuplicateCart == null)
+            var ProdQuantity = db.Products.Where(w => w.ProductID == cart.ProductID && w.Quantity >= cart.Quantity).Any();
+            if (ProdQuantity)
             {
-                if (cart.CartID == 0)
+                if (isDuplicateCart == null)
                 {
-                    Cart objcl = new Cart();
-                    objcl.ProductID = cart.ProductID;
-                    objcl.Quantity = cart.Quantity;
-                    objcl.TotalPrice = cart.TotalPrice * cart.Quantity;
-                    objcl.UserID = cart.UserID;
-                    db.Carts.Add(objcl);
-                    db.SaveChanges();
+                    if (cart.CartID == 0)
+                    {
+                        Cart objcl = new Cart();
+                        objcl.ProductID = cart.ProductID;
+                        objcl.Quantity = cart.Quantity;
+                        objcl.TotalPrice = cart.TotalPrice * cart.Quantity;
+                        objcl.UserID = cart.UserID;
+                        db.Carts.Add(objcl);
+                        db.SaveChanges();
+                    }
+                    return Ok("Success");
                 }
-            return Ok("Success");
+                else
+                {
+                    return Ok("ProductID Already Exists in Cart.");
+                }
             }
             else
             {
-                return Ok("ProductID Already Exists in Cart.");
+                return Ok("Product is Out of Stock. Please reduce the quantity.");
             }
         }
 
         [HttpPut]
         public IHttpActionResult UpdateCart(UpdateCartModel updateCartModel)
         {
-            var cartData = db.Carts.Where(w=>w.UserID == updateCartModel.UserID && w.ProductID == updateCartModel.ProductID).FirstOrDefault();
-            if (cartData != null) {
-                cartData.Quantity = updateCartModel.Quantity;
-                cartData.TotalPrice = updateCartModel.TotalPrice;
-                db.Entry(cartData).State = EntityState.Modified;
-                db.SaveChanges();
-                return Ok("Success");
+            var cartData = db.Carts.Where(w => w.UserID == updateCartModel.UserID && w.ProductID == updateCartModel.ProductID).FirstOrDefault();
+            if (cartData != null)
+            {
+                var ProdQuantity = db.Products.Where(w => w.ProductID == updateCartModel.ProductID && w.Quantity >= updateCartModel.Quantity).Any();
+                if (ProdQuantity)
+                {
+                    cartData.Quantity = updateCartModel.Quantity;
+                    cartData.TotalPrice = updateCartModel.TotalPrice;
+                    db.Entry(cartData).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Ok("Success");
+                }
+                else
+                {
+                    return Ok("Product is Out of Stock. Please reduce the quantity.");
+                }
             }
             else
             {

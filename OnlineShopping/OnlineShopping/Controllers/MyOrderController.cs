@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,7 +12,7 @@ namespace OnlineShopping.Controllers
 
     public class MyOrderController : ApiController
     {
-        DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
         [HttpPost]
         public IHttpActionResult PlaceOrder(MyOrderModel myOrderModel)
@@ -37,12 +38,37 @@ namespace OnlineShopping.Controllers
                     orderDetail.ProductID = item.ProductID;
                     db.OrderDetails.Add(orderDetail);
                     db.SaveChanges();
+                    try
+                    {
+                        var productData = db.Products.Where(p => p.ProductID == item.ProductID).FirstOrDefault();
+                        {
+                            // Product product = new Product();
+                            productData.Quantity = productData.Quantity - item.Quantity;
+                            if (productData.Quantity == 0)
+                            {
+                                productData.InStock = false;
+                            }
+                            else
+                            {
+                                productData.InStock = true;
+
+                            }
+                            productData.ModifiedDate = DateTime.Now;
+
+                            db.Entry(productData).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+                    catch (Exception exp)
+                    {
+                        return Ok(exp);
+
+                    }
                     var cart = db.Carts.Where(w => w.CartID == item.CartID).FirstOrDefault();
                     if (cart != null)
                     {
                         db.Carts.Remove(cart);
                         db.SaveChanges();
-                        return Ok("Success");
                     }
                 }
 

@@ -14,7 +14,7 @@ namespace OnlineShopping.Controllers
 {
     public class CategoriesController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
         [HttpGet]
         public IHttpActionResult GetCategory()

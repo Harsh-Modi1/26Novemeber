@@ -15,7 +15,7 @@ namespace OnlineShopping.Controllers
 {
     public class ProductsController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
         [HttpGet]
         public IHttpActionResult GetProducts()

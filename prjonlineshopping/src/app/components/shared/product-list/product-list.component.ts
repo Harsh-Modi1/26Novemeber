@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Products } from '../../../models/Products.model';
 import { productservice } from '../../../services/productservice';
-
+import { userproductservice } from '../../../services/userproduct.service';
+import { FilterView } from '../../../models/FilterView.model';
 
 @Component({
   selector: 'app-product-list',
@@ -11,18 +12,25 @@ import { productservice } from '../../../services/productservice';
 export class ProductListComponent implements OnInit {
   compareBtn: string = 'Add to Compare';
   products: Products[] = new Array<Products>();
-  //productList: Products[] = [];
-  public searchTerm: string;
-  productList: any = [];
-  public searchText: any;
-  constructor(private prodservice: productservice) { }
+  filterView: FilterView = new FilterView();
+  constructor(private prodservice: productservice, private userproductservice: userproductservice) { }
 
   ngOnInit(): void {
-    this.prodservice.getProduct().subscribe((data: any) => {
-      this.productList = data;
+    this.GetUserProducts(this.filterView);
+  }
+
+  GetUserProducts(filterModel) {
+    this.userproductservice.getUserProducts(filterModel).subscribe((data: any) => {
+      this.products = data;
     });
   }
-// calling the service from productservice.ts
+
+  ClearFilter() {
+    this.filterView = new FilterView();
+    this.GetUserProducts(this.filterView);
+  }
+
+  // calling the service from productservice.ts
   addtoCompare(productId) {
     this.prodservice.compareProduct(productId).subscribe((data: any) => {
       alert('Added to compared Product.');

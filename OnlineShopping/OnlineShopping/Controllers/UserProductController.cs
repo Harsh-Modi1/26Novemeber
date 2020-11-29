@@ -11,10 +11,10 @@ namespace OnlineShopping.Controllers
 {
     public class UserProductController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
 
-        [HttpGet]
-        public IHttpActionResult GetProducts()
+        [HttpPost]
+        public IHttpActionResult GetUserProducts(FilterViewModel filterViewModel)
         {
             var products = db.Products.Select(s => new ProductModel()
             {
@@ -31,8 +31,19 @@ namespace OnlineShopping.Controllers
                 CategoryID = s.CategoryID,
                 ModifiedDate = s.ModifiedDate,
                 InStock = s.InStock
-            }).ToList();
-            return Ok(products);
+            }).AsQueryable();
+            if (filterViewModel.Search != "")
+            {
+                products = products.Where(w => w.ProductName.Contains(filterViewModel.Search) || w.ProductDescription.Contains(filterViewModel.Search)).AsQueryable();
+            }
+            if (filterViewModel.MinPrice != 0 && filterViewModel.MaxPrice != 0)
+            {
+                products = products.Where(w => w.ProductPrice > filterViewModel.MinPrice && w.ProductPrice <= filterViewModel.MaxPrice).AsQueryable();
+            }
+            if (filterViewModel.SortBy == "asc" || filterViewModel.SortBy == "")
+                return Ok(products.OrderBy(o => o.ProductName).ToList());
+            else
+                return Ok(products.OrderByDescending(o => o.ProductName).ToList());
         }
 
     }

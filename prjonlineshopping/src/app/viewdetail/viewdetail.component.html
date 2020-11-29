@@ -33,18 +33,16 @@
                     </div><br />
                     <p>{{product.ProductDescription}}</p>
                     <p>{{product.Brand}} </p>
-                    <!-- <div class="form-inline">
-                        <button type="button" (click)="onAddQuantity(product)"
-                            class="btn btn-success">+</button>
-                        <input type="text" style="width: 50px;" [(ngModel)]="product.Quantity"
-                            (ngModelChange)="product.Quantity=$event" class="form-control">
-                        <button type="button" (click)="onRemoveQuantity(product)"
-                            class="btn btn-danger">-</button>
-                    </div> -->
+                    <div class="form-inline">
+                        <label>Quantity: &nbsp;</label>
+                        <input type="number" min="0" style="width: 80px;" [(ngModel)]="cartQuantity"
+                            class="form-control">
+                    </div>
                     <div class="add-to-cart">
-                        <button class="btn btn-sm btn-primary product-btn" (click)="AddToCart(product)"><i
-                                class="glyphicon glyphicon-shopping-cart"></i> Add to cart</button>
-                    </div><br/>
+                        <button class="btn btn-sm btn-primary product-btn" style="margin-top: 10px;"
+                            (click)="AddToCart(product)"><i class="glyphicon glyphicon-shopping-cart"></i> Add to
+                            cart</button>
+                    </div><br />
                     <div class="add-to-wishlist">
                         <button class="btn btn-sm btn-info product-btn" (click)="AddToWishlist(product)"><i
                                 class="glyphicon glyphicon-heart-empty"></i>Add to wishlist</button>

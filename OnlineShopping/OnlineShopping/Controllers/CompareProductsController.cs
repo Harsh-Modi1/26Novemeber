@@ -11,7 +11,7 @@ namespace OnlineShopping.Controllers
 {
     public class CompareProductsController : ApiController
     {
-        private DbonlineshoppingEntities1 db = new DbonlineshoppingEntities1();
+        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
         static List<Product> compareProducts = new List<Product>();
         [HttpGet]
         //[Route("addCompareProduct")]

@@ -27,8 +27,10 @@ import { RetailerdashboardComponent } from './retailerdashboard/retailerdashboar
 import { ProductfilterPipe } from 'src/app/filter/productfilter.pipe';
 import { CartComponent } from './components/shared/cart/cart.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
-
-
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { ProductmanagementComponent } from './productmanagement/productmanagement.component';
+import { SortPipe } from './filter/sort.pipe';
+import { UploadImageService } from './services/imageupload.service';
 
 
 @NgModule({
@@ -54,7 +56,10 @@ import { ProductListComponent } from './components/shared/product-list/product-l
     AdmindashboardComponent,
     RetailerviewComponent,
     RetailerdashboardComponent,
-    ProductfilterPipe
+    ProductfilterPipe,
+    PagenotfoundComponent,
+    ProductmanagementComponent,
+    SortPipe
     ],
   imports: [
     BrowserModule,
@@ -63,7 +68,7 @@ import { ProductListComponent } from './components/shared/product-list/product-l
     FormsModule,
     HttpClientModule
   ],
-  providers: [productservice, categoryservice],
+  providers: [productservice, categoryservice, UploadImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
