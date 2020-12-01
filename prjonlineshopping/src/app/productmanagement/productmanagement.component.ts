@@ -15,6 +15,7 @@ export class ProductmanagementComponent implements OnInit {
   error: string;
   deleteProductId: number;
   selectedFile = null;
+  imagePath: string = 'https://localhost:44324/';
   // imageUrl: string = '/assets/images/download.png';
   // fileToUpload: File = null;
   // mdlSampleIsOpen: boolean = false;

@@ -24,13 +24,14 @@
                             <td>
                                 <p>{{i + 1}}</p>
                             </td>
-                            <td><img width="130px;" height="130px;" />
+                            <td><img width="130px;" height="130px;" src="{{imagePath}}{{cartItem.Image}}" alt="">
+                                <!-- <img width="130px;" height="130px;" /> -->
                             </td>
                             <td>
                                 <p>{{cartItem.ProductName}}</p>
                             </td>
                             <td>
-                                <p>{{cartItem.ProductPrice}}</p>
+                                <p>{{cartItem.ProductPrice | currency:'INR':'symbol-narrow'}}</p>
                             </td>
                             <td>
                                 <div class="form-inline">
@@ -43,7 +44,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p>{{cartItem.TotalPrice}}</p>
+                                <p>{{cartItem.TotalPrice | currency:'INR':'symbol-narrow'}}</p>
                             </td>
                             <td>
                                 <button class="btn btn-danger" (click)="handleRemoveFromCart(cartItem.CartID)">Remove
@@ -57,7 +58,7 @@
 
             <div class="col-md-12 d-flex mb-5">
                 <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
-                    <p><b>Total Price : {{cartTotal}} </b></p>
+                    <p><b>Total Price : {{cartTotal | currency:'INR':'symbol-narrow'}} </b></p>
                 </div>
             </div>
             <div class="col-md-12 d-flex mb-5">

@@ -1,0 +1,36 @@
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>Sr No.</th>
+            <th>OrderId/Order Details</th>
+            <th>Order Total</th>
+            <th>Order Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let myOrder of myOrderDetailList; let i=index">
+            <td>
+                <p>{{i + 1}}</p>
+            </td>
+            <td>
+                <p><b>OrderID:</b> {{myOrder.OrderID}}</p>
+                <div *ngFor="let orderDetail of myOrder.CartModel;">
+                    <p><b>-------------------------------------------------------</b></p>
+                    <p><b>Product Name:</b> {{orderDetail.ProductName}}</p>
+                    <p><b>Product Description:</b> {{orderDetail.ProductDescription}}</p>
+                    <p><b>Product Price:</b> {{orderDetail.ProductPrice}}</p>  
+                    <p><b>Quantity:</b> {{orderDetail.Quantity}}</p>
+                    <p><b>Total Price:</b> {{orderDetail.TotalPrice}}</p>
+                  <p><b>Image:</b><img width="130px;" height="130px;" src="{{imagePath}}{{orderDetail.Image}}" alt="">
+                    </p>
+                </div>
+            </td>
+            <td>
+                <p>{{myOrder.OrderTotal}}</p>
+            </td>
+            <td>
+                <p>{{myOrder.OrderDate | date:'dd/MM/yyyy'}}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>

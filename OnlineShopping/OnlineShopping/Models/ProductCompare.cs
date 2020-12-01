@@ -13,6 +13,7 @@ namespace OnlineShopping.Models
         public string Brand { get; set; }
        
         public float ProductPrice { get; set; }
-      
+        public string Image { get; set; }
+
     }
 }

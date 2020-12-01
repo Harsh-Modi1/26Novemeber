@@ -12,6 +12,7 @@ export class WishlistComponent implements OnInit {
   deletewishid: number;
   products: Products[];
   wishlistmodel: WishlistModel[] = new Array<WishlistModel>();
+  imagePath: string = 'https://localhost:44324/';
   constructor(private prodservice: productservice) { }
 
   ngOnInit(): void {
@@ -27,6 +28,31 @@ export class WishlistComponent implements OnInit {
     });
 
   }
+  // AddToCart(productModel) {
+  //   if (!sessionStorage.getItem('userId')) {
+  //     this.router.navigate(['login']);
+  //     alert('Login first to add to Cart.');
+  //     return;
+  //   }
+  //   let model = {
+  //     ProductID: productModel.ProductID,
+  //     TotalPrice: productModel.ProductPrice,
+  //     Quantity: this.cartQuantity,
+  //     UserID: sessionStorage.getItem('userId')
+  //   };
+  //   this.prodservice.AddToCart(model).subscribe((response: any) => {
+  //     if (response == 'Success') {
+  //       alert('Product Successfully added to cart.');
+  //     }
+  //     else if (response == 'ProductID Already Exists in Cart.') {
+  //       alert(response);
+  //     }
+  //     else {
+  //       alert(response);
+  //     }
+  //   });
+  // }
+
   
 
   handleRemoveFromWishlist(id){

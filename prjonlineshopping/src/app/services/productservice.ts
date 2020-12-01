@@ -4,13 +4,17 @@ import { Products } from '../models/Products.model';
 
 @Injectable({ providedIn: 'root' })
 export class productservice {
-    product: Products[];
+
     constructor(private http: HttpClient) { }
 
     readonly uri = 'https://localhost:44324/api/Products/';
 
     getProduct() {
         return this.http.get(this.uri);
+    }
+
+    getProductsByRetailerId(retailerId) {
+        return this.http.get('https://localhost:44324/api/RetailersProduct/GetProductsByRetailerId?retailerId=' + retailerId);
     }
 
     Product(model) {
@@ -22,8 +26,7 @@ export class productservice {
     }
 
     insertProductImage(fileToUploads, productId, isDefault) {
-        debugger;
-        const formData: FormData = new FormData();
+        // const formDataObj: FormData[] = new Array<FormData>();
         // fileToUploads.forEach(fileToUpload => {
         //     const formData: FormData = new FormData();
         //     formData.append('Name', fileToUpload.name);
@@ -32,20 +35,22 @@ export class productservice {
         //     formData.append('IsDefault', isDefault);
         //     formDataObj.push(formData);
         // });
-        fileToUploads.forEach((file) => { formData.append('files[]', file); });
-        // const httpOptions = {
-        //     headers: new HttpHeaders({ 'Content-Disposition': 'multipart/form-data' }),
-        // };
-        let headers = new HttpHeaders({
-            'Content-Type': 'application/json; charset=UTF-8'
+        const formData = new FormData();
+
+        formData.append('ProductId', productId);
+        formData.append('IsDefault', isDefault);
+
+        const array = new Array<File>();
+
+        fileToUploads.forEach(fileToUpload => {
+            array.push(fileToUpload);
         });
-        let options = {
-            headers: headers
-        }
 
+        array.forEach(x => {
+            formData.append('Image', x, x.name);
+        });
 
-
-        return this.http.post('https://localhost:44324/api/Image/UploadImage', formData, options);
+        return this.http.post('https://localhost:44324/api/Image/UploadImage', formData);
     }
 
     deleteProduct(id) {

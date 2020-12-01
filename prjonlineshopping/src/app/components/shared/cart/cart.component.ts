@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   updateCartModel: UpdateCartModel = new UpdateCartModel();
   deletecartid: number;
   myOrderDetailModel: MyOrderModel = new MyOrderModel();
+  imagePath: string = 'https://localhost:44324/';
 
   constructor(private router: Router, private prodservice: productservice, private orderservice: Orderservice) { }
 

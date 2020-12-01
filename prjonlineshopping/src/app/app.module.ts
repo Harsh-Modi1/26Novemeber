@@ -30,8 +30,7 @@ import { ProductListComponent } from './components/shared/product-list/product-l
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ProductmanagementComponent } from './productmanagement/productmanagement.component';
 import { SortPipe } from './filter/sort.pipe';
-import { UploadImageService } from './services/imageupload.service';
-
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +58,8 @@ import { UploadImageService } from './services/imageupload.service';
     ProductfilterPipe,
     PagenotfoundComponent,
     ProductmanagementComponent,
-    SortPipe
+    SortPipe,
+    MyOrdersComponent
     ],
   imports: [
     BrowserModule,
@@ -68,7 +68,7 @@ import { UploadImageService } from './services/imageupload.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [productservice, categoryservice, UploadImageService],
+  providers: [productservice, categoryservice],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

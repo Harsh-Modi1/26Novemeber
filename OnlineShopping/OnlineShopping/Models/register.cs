@@ -7,10 +7,8 @@ using System.Web;
 namespace OnlineShopping.Models
 {
     [DataContract]
-    public class register
+    public class Register
     {
-        [DataMember]
-        public int Id { get; set; }
         [DataMember]
         public int UserID { get; set; }
         [DataMember]

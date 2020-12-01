@@ -22,8 +22,8 @@ namespace OnlineShopping.Models
     
         public int OrderID { get; set; }
         public double OrderTotal { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
+        public int UserID { get; set; }
+        public System.DateTime OrderDate { get; set; }
     
         public virtual UserTable UserTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

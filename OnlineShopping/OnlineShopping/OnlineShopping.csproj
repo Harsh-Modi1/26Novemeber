@@ -537,15 +537,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CompareProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
-    <Compile Include="Controllers\MyOrderController.cs" />
+    <Compile Include="Controllers\MyOrdersController.cs" />
     <Compile Include="Controllers\OTPController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\registersController.cs" />
+    <Compile Include="Controllers\RetailersProductController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserProductController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WishlistController.cs" />
@@ -554,68 +556,68 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddressTable.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Category.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\FilterViewModel.cs" />
     <Compile Include="Models\Image.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\login.cs" />
     <Compile Include="Models\MyOrder.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MyOrderModel.cs" />
     <Compile Include="Models\NotificationTable.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineShoppingModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineShoppingModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineShoppingModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineShoppingModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineShoppingModel.edmx</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetailModel.cs" />
     <Compile Include="Models\OTP.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductCompare.cs" />
     <Compile Include="Models\ProductModel.cs" />
-    <Compile Include="Models\register.cs" />
+    <Compile Include="Models\ProjectShoppingModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectShoppingModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectShoppingModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectShoppingModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectShoppingModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Register.cs" />
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UnnapprovedProduct.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserTable.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WishList.cs">
-      <DependentUpon>OnlineShoppingModel.tt</DependentUpon>
+      <DependentUpon>ProjectShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WishlistModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -629,15 +631,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\OnlineShoppingModel.Context.tt">
+    <Content Include="Models\ProjectShoppingModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineShoppingModel.edmx</DependentUpon>
-      <LastGenOutput>OnlineShoppingModel.Context.cs</LastGenOutput>
+      <DependentUpon>ProjectShoppingModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectShoppingModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\OnlineShoppingModel.tt">
+    <Content Include="Models\ProjectShoppingModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineShoppingModel.edmx</DependentUpon>
-      <LastGenOutput>OnlineShoppingModel.cs</LastGenOutput>
+      <DependentUpon>ProjectShoppingModel.edmx</DependentUpon>
+      <LastGenOutput>ProjectShoppingModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -660,12 +662,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\OnlineShoppingModel.edmx">
+    <EntityDeploy Include="Models\ProjectShoppingModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OnlineShoppingModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProjectShoppingModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\OnlineShoppingModel.edmx.diagram">
-      <DependentUpon>OnlineShoppingModel.edmx</DependentUpon>
+    <Content Include="Models\ProjectShoppingModel.edmx.diagram">
+      <DependentUpon>ProjectShoppingModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

@@ -5,11 +5,11 @@
         <strong>Filters</strong></div>
       <div class="card-body">
         <div class="form-group">
-          <label for="from">From</label>
+          <label for="from">Min Price</label>
           <input type="number" id="from" [(ngModel)]="filterView.MinPrice" class="form-control">
         </div>
         <div class="form-group">
-          <label for="to">To</label>
+          <label for="to">Max Price</label>
           <input type="number" id="to" [(ngModel)]="filterView.MaxPrice" class="form-control">
         </div>
         <button class="btn-btn-primary btn-block" (click)="GetUserProducts(filterView);">Filter By Price</button>
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <a class="p-2 text-dark btn btn-outline-primary" href="compare" style="margin-bottom: 15px;">Go to Compare
+    <a *ngIf="loginsession" class="p-2 text-dark btn btn-outline-primary" href="compare" style="margin-bottom: 15px;">Go to Compare
       Products</a>
     <div class="row">
       <div class="col-md-4" *ngFor="let productItem of products">
@@ -51,7 +51,7 @@
           <p class="card-text" style="text-align: center;color: red;">
             <strong>{{productItem.ProductName}}</strong>
           </p>
-          <img class="bd-placeholder-img card-img-top" width="100%" src="assets/images/m1.jpg" />
+          <img class="bd-placeholder-img card-img-top" width="100%" src="{{imagePath}}{{productItem.Image}}" />
           <div class="card-body">
             <p class="card-text">
               <strong>{{productItem.ProductPrice | currency:'INR':'symbol-narrow'}}</strong>

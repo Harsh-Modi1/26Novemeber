@@ -9,6 +9,7 @@ import { productservice } from '../services/productservice';
 })
 export class CompareproductsComponent implements OnInit {
   productdata: Products[] = new Array<Products>();
+  imagePath: string = 'https://localhost:44324/';
 
   constructor(private prodservice: productservice) { }
 

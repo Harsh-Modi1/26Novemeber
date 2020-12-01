@@ -10,15 +10,16 @@ export class NavComponent implements OnInit {
   title: string = 'prjonlineshopping';
   loginsession: boolean;
   userName: string = '';
+  role: string = '';
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.role = sessionStorage.getItem('role');
   }
 
   ngDoCheck() {
-    if (sessionStorage.getItem('email'))
-    {
+    if (sessionStorage.getItem('email')) {
       this.loginsession = true;
       this.userName = sessionStorage.getItem('userName');
     } else {

@@ -14,18 +14,27 @@ namespace OnlineShopping.Controllers
 {
     public class CategoriesController : ApiController
     {
-        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
-
+        private DbproonlineshoppingEntities db = new DbproonlineshoppingEntities();
+        
+        #region DisplayCategory
         [HttpGet]
         public IHttpActionResult GetCategory()
         {
-            var categories = db.Categories.Select(s => new Categories()
+            try
             {
-                CategoryID = s.CategoryID,
-                CategoryName = s.CategoryName
-            }).ToList();
-            return Ok(categories);
+                var categories = db.Categories.Select(s => new Categories()
+                {
+                    CategoryID = s.CategoryID,
+                    CategoryName = s.CategoryName
+                }).ToList();
+                return Ok(categories);
+            }
+            catch(Exception e)
+            {
+                return Ok(e);
+            }
         }
+        #endregion
 
 
     }

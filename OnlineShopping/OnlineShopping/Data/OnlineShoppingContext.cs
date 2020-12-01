@@ -19,6 +19,6 @@ namespace OnlineShopping.Data
         {
         }
 
-        public System.Data.Entity.DbSet<OnlineShopping.Models.register> registers { get; set; }
+        public System.Data.Entity.DbSet<OnlineShopping.Models.Register> registers { get; set; }
     }
 }

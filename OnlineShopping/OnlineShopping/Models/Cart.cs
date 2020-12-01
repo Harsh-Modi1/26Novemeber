@@ -15,10 +15,10 @@ namespace OnlineShopping.Models
     public partial class Cart
     {
         public int CartID { get; set; }
-        public Nullable<int> ProductID { get; set; }
+        public int ProductID { get; set; }
         public double TotalPrice { get; set; }
         public int Quantity { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public int UserID { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual UserTable UserTable { get; set; }

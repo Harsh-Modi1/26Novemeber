@@ -1,4 +1,5 @@
-<table>
+<!-- <div class="container">
+    <table>
     <td  *ngFor="let p of productdata;let i=index">
         <tr>Product Name :{{p.ProductName}}</tr>
         <tr>Product Description :{{p.ProductDescription}}</tr>
@@ -6,4 +7,25 @@
         <tr>Product Price : {{p.ProductPrice | currency:'INR':'symbol-narrow'}}</tr>
     </td>
 </table>
+</div> -->
+<h2 style="text-align: center;">Compare Products</h2>
+<hr>
+
+<div class="row">
+    <div class="col-md-4" *ngFor="let p of productdata;let i=index">
+      <div class="card mb-4 shadow-sm">
+        <p class="card-text" style="text-align: center;color: red;">
+          <strong>{{p.ProductName}}</strong>
+        </p>
+        <img class="bd-placeholder-img card-img-top" width="100%" src="{{imagePath}}{{p.Image}}" />
+        <div class="card-body">
+          <p class="card-text">
+            <strong>{{p.ProductPrice | currency:'INR':'symbol-narrow'}}</strong>
+          </p>
+          <p class="card-text">{{p.Brand}}</p>
+          <p class="card-text">{{p.ProductDescription}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 

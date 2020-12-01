@@ -1,8 +1,10 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <a class="navbar-brand" >Admin Dashboard</a>
       </div>
+
+     
       <ul class="nav navbar-nav">
         <li class="active"><a href="productmanagement">Product Management</a></li>
         <li><a href="retailercrud">Add Retailer</a></li>
@@ -10,14 +12,16 @@
       </ul>
     </div>
   </nav>
+
+  <app-retailerview></app-retailerview>
   <div class="adminpage">
     <router-outlet></router-outlet>
   </div>
 
-
+<!-- 
 <a class="p-2 text-dark btn btn-outline-primary" href="retailercrud">Add Retailer</a>
 
 <hr>
 
-<a class="p-2 text-dark btn btn-outline-primary" href="retailerview">View Retailer</a>
+<a class="p-2 text-dark btn btn-outline-primary" href="retailerview">View Retailer</a> -->
 

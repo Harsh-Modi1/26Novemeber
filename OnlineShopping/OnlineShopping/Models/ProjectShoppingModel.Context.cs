@@ -13,10 +13,10 @@ namespace OnlineShopping.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DbonlineshoppingEntities : DbContext
+    public partial class DbproonlineshoppingEntities : DbContext
     {
-        public DbonlineshoppingEntities()
-            : base("name=DbonlineshoppingEntities")
+        public DbproonlineshoppingEntities()
+            : base("name=DbproonlineshoppingEntities")
         {
         }
     

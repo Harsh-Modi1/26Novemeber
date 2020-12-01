@@ -1,18 +1,63 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Retailer Dashboard</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="productcrud">Product Management</a></li>
-        <li><a href="productcrud">Add Product</a></li>
-        <li><a href="#">Total Revenue</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="adminpage">
-    <router-outlet></router-outlet>
+<div class="row">
+  <div class="col-md-10">
+    <h5>Retailer Dashboard</h5>
   </div>
+  <hr>
+  <div class="col-md-2">
+    <ul class="nav navbar-nav">
+      <li><a href="productcrud/0">Add Product</a></li>
+      <!-- <li><a href="#">Total Revenue</a></li> -->
+    </ul>
+   
+  </div>
+</div>
 
-<a class="p-2 text-dark btn btn-outline-primary" href="productcrud">Add Product</a>
+<table>
+  <tr>
+    <th style="width: 70px;">Sr No.</th>
+    <th style="width: 100px;">Image</th>
+    <th style="width: 150px;">Product Code</th>
+    <th style="width: 150px;">Product Name</th>
+    <th style="width: 200px;">Product Description</th>
+    <th style="width: 150px;">Product Price</th>
+    <th style="width: 100px;">Brand</th>
+    <th style="width: 100px;">Quantity</th>
+    <th style="width: 100px;">InStock</th>
+    <th style="width: 200px;">Actions</th>
+  </tr>
 
+  <tr *ngFor="let p of products; let i=index">
+    <td style="width: 70px;">{{i + 1}}</td>
+    <td style="width: 100px;"><img style="width: 40px; height: 40px;" src="{{imagePath}}{{p.Image}}" alt=""></td>
+    <td style="width: 150px;">{{p.ProductCode}}</td>
+    <td style="width: 150px;">{{p.ProductName}}</td>
+    <td style="width: 200px;">{{p.ProductDescription}}</td>
+    <td style="width: 150px;">{{p.ProductPrice}}</td>
+    <td style="width: 100px;">{{p.Brand}}</td>
+    <td style="width: 100px;">{{p.Quantity}}</td>
+    <td style="width: 100px;">{{p.InStock ? 'Yes' : 'No'}}</td>
+    <td style="width: 200px;">
+      <a class="btn btn-primary" href="productcrud/{{p.ProductID}}">Edit</a>
+      <!-- <button class="btn btn-danger" (click)="openDeletePopup(contentdelete, p.ProductID);">Delete</button> -->
+    </td>
+  </tr>
+</table>
+
+<!-- Delete Popup Start -->
+<ng-template #contentdelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <p>Are you Sure you want to Delete?</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="DeleteProduct()">Ok</button>
+  </div>
+</ng-template>
+<!-- Delete Popup End -->

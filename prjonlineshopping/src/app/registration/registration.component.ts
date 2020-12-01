@@ -39,10 +39,13 @@ export class RegistrationComponent implements OnInit {
     debugger;
     this.registrationService.Register(model).subscribe((response: any) => {
       this.submitted = false;
-      alert("User Registered Succesfully");
-      this.registrationModel = new RegistrationModel();
-      if (response.IsValid) {
-
+      if (response == "Success") {
+        alert("User Registered Successfully.");
+        this.registrationModel = new RegistrationModel();
+        window.location.href = 'login';
+      }
+      else{
+        alert(response);
       }
     });
 

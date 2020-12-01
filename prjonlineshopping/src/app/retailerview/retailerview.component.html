@@ -11,8 +11,6 @@
     <th style="width: 150px;">MobileNo</th>
     <th style="width: 100px;">Email ID</th>
     <th style="width: 100px;">Role</th>
-    <th style="width: 100px;">Status</th>
-    <!-- <th style="width: 100px;">Password</th> -->
     <th style="width: 100px;">Actions</th>
   </tr>
 
@@ -25,8 +23,6 @@
     <td style="width: 100px;">{{r.MobileNumber}}</td>
     <td style="width: 100px;">{{r.Email}}</td>
     <td style="width: 100px;">{{r.Role}}</td>
-    <td style="width: 100px;">{{r.Status}}</td>
-    <!-- <td style="width: 100px;">{{r.Password}}</td> -->
     <td style="width: 200px;"><button (click)="GetRetailerById(r.UserID)">Edit</button> |
       <button class="btn btn-danger" (click)="openDeletePopup(contentdelete, r.UserID);">Delete</button>
     </td>

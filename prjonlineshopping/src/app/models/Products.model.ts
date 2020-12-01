@@ -13,7 +13,8 @@ export class Products {
         this.ModifiedBy = '';
         this.ModifiedDate = null;
         this.CategoryName = '';
-        this.Image = null;
+        this.Image = '';
+        this.RetailerID = 0;
     }
     ProductID: number;
     ProductCode: string;
@@ -28,5 +29,6 @@ export class Products {
     ModifiedBy: string;
     ModifiedDate: Date;
     CategoryName: string;
-    Image: File;
+    Image: string;
+    RetailerID: number;
 }

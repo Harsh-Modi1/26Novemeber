@@ -7,25 +7,31 @@ import { HttpClient } from '@angular/common/http';
 export class RegistrationService {
 
   constructor(private http: HttpClient) { }
-// Calling WebApi For User Registration
+  // Calling WebApi For User Registration
   Register(model) {
-    debugger;
-    return this.http.post('https://localhost:44324/api/registers/', model);
+    return this.http.post('https://localhost:44324/api/Users/RegisterUser', model);
   }
-// Calling WebApi For User Login
+  
+  // Calling WebApi For User Login
   Login(model) {
-    return this.http.get('https://localhost:44324/api/registers?email=' + model.email + '&password=' + model.password);
+    return this.http.get('https://localhost:44324/api/Users/?email=' + model.email + '&password=' + model.password);
   }
-// Calling WebApi For Forgot Password
-  ForgotPassword(email){
+
+  AdminLogin(model) {
+    return this.http.get('https://localhost:44324/api/AdminLogin/AdminLogin/?email=' + model.email + '&password=' + model.password);
+  }
+
+  // Calling WebApi For Forgot Password
+  ForgotPassword(email) {
     return this.http.get('https://localhost:44324/api/OTP/VerifyEmail?email=' + email);
   }
-// Calling WebApi For Change Password
-  ChangePassword(model){
+  
+  // Calling WebApi For Change Password
+  ChangePassword(model) {
     return this.http.post('https://localhost:44324/api/OTP/ChangePassword', model);
   }
 
   GetRetailer() {
-    return this.http.get('https://localhost:44324/api/registers/');
-}
+    return this.http.get('https://localhost:44324/api/Users/');
+  }
 }

@@ -12,6 +12,8 @@ import { CartModel } from '../models/Cart.model';
 export class ViewdetailComponent implements OnInit {
   product: Products = new Products();
   cartQuantity: number = 1;
+  imagePath: string = 'https://localhost:44324/';
+  
   constructor(private prodservice: productservice, private router: Router) { }
 
   ngOnInit(): void {
@@ -44,6 +46,23 @@ export class ViewdetailComponent implements OnInit {
         alert(response);
       }
     });
+
+  //chandana  work
+  
+    // this.prodservice.AddToCart(model).subscribe((response: any) => {
+    //   if (response == 'Success') {
+    //     alert('Product Successfully added to cart.');
+    //   }
+    //   else if(response =="ProductID Already Exists in Cart."){
+    //     alert('Product Already Exists in Cart.Go to Cart to increase the Quantity');
+    //   }
+    //   else if(response =="Cart Quantity is more than the Product Quantity.Please Choose less quantity"){
+    //     alert('Cart Quantity is more than the Product Quantity.Please Choose less quantity');
+    //   }
+    //   else{
+    //     alert("Product Out Of Stock");
+    //   }
+    // });
   }
   AddToWishlist(productModel) {
     if (!sessionStorage.getItem('userId')) {

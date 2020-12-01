@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { RegistrationService } from '../services/registration.service';
 import { login } from '../login/login.model';
 
@@ -12,7 +11,7 @@ export class LoginComponent implements OnInit {
   loginobject: login = new login();
   err: string;
   loginForm: FormGroup;
-  constructor(private router: Router, private registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService) {
     this.loginForm = new FormGroup({
       mailid: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required)
@@ -20,6 +19,9 @@ export class LoginComponent implements OnInit {
 
   }
 
+  ngOnInit(): void {
+  }
+  
   doLogin() {
     this.registrationService.Login(this.loginobject).subscribe((response: any) => {
       if (response.IsValidUser) {
@@ -27,16 +29,19 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('userId', response.UserId);
         sessionStorage.setItem('userName', response.UserName);
         sessionStorage.setItem('role', response.Role);
-        this.router.navigate(['home']);
+        if (response.Role == 'User') {
+          window.location.href = 'home';
+        }
+        else if (response.Role == 'Retailer') {
+          window.location.href = 'retailerdashboard';
+        }
+        else if (response.Role == 'Admin') {
+          window.location.href = 'admin';
+        }
       }
       else {
         this.err = 'Invalid username or password!!';
       }
     });
   }
-
-
-  ngOnInit(): void {
-  }
-
 }

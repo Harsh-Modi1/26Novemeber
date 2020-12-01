@@ -1,6 +1,5 @@
 export class RegistrationModel {
     constructor() {
-        this.Id = null;
         this.UserID = null;
         this.FirstName = '';
         this.LastName = '';
@@ -13,7 +12,6 @@ export class RegistrationModel {
         this.Status = '';
         this.CreatedOn = null;
     }
-    Id: number;
     UserID: number;
     FirstName: string;
     LastName: string;

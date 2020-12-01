@@ -5,7 +5,7 @@
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
                     <div class="product-preview">
-                        <img src="/assets/images/m1.jpg" alt="">
+                        <img src="{{imagePath}}{{product.Image}}" alt="">
                     </div>
 
                     <div class="product-preview">
@@ -29,7 +29,7 @@
                     <h2 class="product-name">{{product.ProductName}}</h2>
                     <div>
                         <h3 class="product-price">{{product.ProductPrice | currency:'INR':'symbol-narrow'}}</h3>
-                        <span class="product-available">In Stock</span>
+                        <span class="product-available">In Stock &nbsp;{{product.InStock}}</span>
                     </div><br />
                     <p>{{product.ProductDescription}}</p>
                     <p>{{product.Brand}} </p>
@@ -47,9 +47,9 @@
                         <button class="btn btn-sm btn-info product-btn" (click)="AddToWishlist(product)"><i
                                 class="glyphicon glyphicon-heart-empty"></i>Add to wishlist</button>
                     </div><br />
-                    <div class="add-to-compare">
+                    <!-- <div class="add-to-compare">
                         <button>Add to Compare</button>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

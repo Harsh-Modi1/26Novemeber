@@ -10,65 +10,93 @@ namespace OnlineShopping.Controllers
 {
     public class WishlistController : ApiController
     {
-        DbonlineshoppingEntities db = new DbonlineshoppingEntities();
+        DbproonlineshoppingEntities db = new DbproonlineshoppingEntities();
 
+        #region AddingToWishlist
         [HttpGet]
         public IHttpActionResult WishlistProduct(int userId)
         {
-            var products = db.WishLists.Where(w => w.UserID == userId).Select(s => new WishlistModel()
+            try
             {
-                WishListID = s.WishListID,
-                ProductDescription = s.Product.ProductDescription,
-                ProductCode = s.Product.ProductCode,
-                ProductName = s.Product.ProductName,
-                ProductPrice = s.Product.ProductPrice,
-                ProductID = s.Product.ProductID,
-            }).ToList();
-            return Ok(products);
+                var products = db.WishLists.Where(w => w.UserID == userId).Select(s => new WishlistModel()
+                {
+                    WishListID = s.WishListID,
+                    ProductDescription = s.Product.ProductDescription,
+                    ProductCode = s.Product.ProductCode,
+                    ProductName = s.Product.ProductName,
+                    ProductPrice = s.Product.ProductPrice,
+                    ProductID = s.Product.ProductID,
+                    Image = s.Product.Images.Where(w => w.ProductID == s.ProductID).Select(t => t.ProductImage).FirstOrDefault()
+                }).ToList();
+                return Ok(products);
+            }
+            catch(Exception e)
+            {
+                return Ok(e);
+            }
+            
         }
+        #endregion
 
- 
         #region Post Wishlist
 
         [HttpPost]
         public IHttpActionResult AddtoWishlist(WishList wishList)
         {
-            var isDuplicateWishlist = db.WishLists.Where(w => w.ProductID == wishList.ProductID
+            try
+            {
+                var isDuplicateWishlist = db.WishLists.Where(w => w.ProductID == wishList.ProductID
              && w.UserID == wishList.UserID).FirstOrDefault();
-            if (isDuplicateWishlist == null)
-            {
-                if (wishList.WishListID == 0)
+                if (isDuplicateWishlist == null)
                 {
-                    WishList obwishList1 = new WishList();
-                    obwishList1.ProductID = wishList.ProductID;
-                    obwishList1.UserID = wishList.UserID;
-                    db.WishLists.Add(obwishList1);
-                    db.SaveChanges();
+                    if (wishList.WishListID == 0)
+                    {
+                        WishList obwishList1 = new WishList();
+                        obwishList1.ProductID = wishList.ProductID;
+                        obwishList1.UserID = wishList.UserID;
+                        db.WishLists.Add(obwishList1);
+                        db.SaveChanges();
+                    }
+                    return Ok("Success");
                 }
-                return Ok("Success");
+                else
+                {
+                    return Ok("ProductID Already Exists in Wishlist.");
+                }
             }
-            else
+            catch (Exception e)
             {
-                return Ok("ProductID Already Exists in Wishlist.");
+                return Ok(e);
             }
+            
         }
         #endregion
 
+        #region DeletingFromWishlist
         [HttpDelete]
         public IHttpActionResult RemoveWishList(int id)
         {
-            var wish = db.WishLists.Where(w => w.WishListID == id).FirstOrDefault();
-            if (wish != null)
+            try
             {
-                db.WishLists.Remove(wish);
-                db.SaveChanges();
-                return Ok("Success");
+                var wish = db.WishLists.Where(w => w.WishListID == id).FirstOrDefault();
+                if (wish != null)
+                {
+                    db.WishLists.Remove(wish);
+                    db.SaveChanges();
+                    return Ok("Success");
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            else
+            catch (Exception e)
             {
-                return NotFound();
+                return Ok(e);
             }
+           
         }
+        #endregion
 
     }
 }

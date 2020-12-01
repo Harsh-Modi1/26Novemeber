@@ -20,5 +20,6 @@ namespace OnlineShopping.Models
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string CategoryName { get; set; }
+        public string Image { get; set; }
     }
 }

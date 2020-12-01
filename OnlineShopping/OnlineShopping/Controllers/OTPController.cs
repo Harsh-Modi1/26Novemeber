@@ -13,20 +13,30 @@ namespace OnlineShopping.Controllers
 {
     public class OTPController : ApiController
     {
-        private DbonlineshoppingEntities db = new DbonlineshoppingEntities();
+        private DbproonlineshoppingEntities db = new DbproonlineshoppingEntities();
 
+        #region VerifyEmail
         [HttpGet]
         public IHttpActionResult VerifyEmail(string email)
         {
-            var isValidEmail = db.UserTables.Where(w => w.Email == email).FirstOrDefault();
-            if (isValidEmail != null)
+            try
             {
-                GetOtp(email);
-                return Ok("Success");
+                var isValidEmail = db.UserTables.Where(w => w.Email == email).FirstOrDefault();
+                if (isValidEmail != null)
+                {
+                    GetOtp(email);
+                    return Ok("Success");
+                }
+                else
+                    return Ok("InvalidUser");
             }
-            else
-                return Ok("InvalidUser");
+            catch (Exception e)
+            {
+                return Ok(e);
+            }
+           
         }
+        #endregion
 
         private async Task<int> GetOtp(string email)
         {
@@ -71,36 +81,46 @@ namespace OnlineShopping.Controllers
             await Task.Run(() => smtp.SendAsync(mailMessage, null));
         }
 
+        #region ChangePassword
         [HttpPost]
         public IHttpActionResult ChangePassword(ChangePasswordModel changePasswordModel)
         {
-            var user = db.UserTables.Where(w => w.Email == changePasswordModel.EmailId).FirstOrDefault();
-            if (user != null)
+            try
             {
-                var isOtpValid = db.OTPs.Where(w => w.OTP1 == changePasswordModel.OTP && w.UserID == user.UserID).FirstOrDefault();
-                if (isOtpValid != null)
+                var user = db.UserTables.Where(w => w.Email == changePasswordModel.EmailId).FirstOrDefault();
+                if (user != null)
                 {
-                    user.Password = changePasswordModel.Password;
-                    db.Entry(user).State = EntityState.Modified;
-                    db.SaveChanges();
-
-                    var otpData = db.OTPs.Where(w => w.UserID == user.UserID && w.OTP1 == changePasswordModel.OTP).FirstOrDefault();
-                    if (otpData != null)
+                    var isOtpValid = db.OTPs.Where(w => w.OTP1 == changePasswordModel.OTP && w.UserID == user.UserID).FirstOrDefault();
+                    if (isOtpValid != null)
                     {
-                        db.OTPs.Remove(otpData);
+                        user.Password = changePasswordModel.Password;
+                        db.Entry(user).State = EntityState.Modified;
                         db.SaveChanges();
+
+                        var otpData = db.OTPs.Where(w => w.UserID == user.UserID && w.OTP1 == changePasswordModel.OTP).FirstOrDefault();
+                        if (otpData != null)
+                        {
+                            db.OTPs.Remove(otpData);
+                            db.SaveChanges();
+                        }
+                        return Ok("Success");
                     }
-                    return Ok("Success");
+                    else
+                    {
+                        return Ok("Invalid OTP.");
+                    }
                 }
                 else
-                {
-                    return Ok("Invalid OTP.");
-                }
+                    return Ok("Error occured in updating password! Please try again later.");
             }
-            else
-                return Ok("Error occured in updating password! Please try again later.");
+            catch(Exception e)
+            {
+                return Ok(e);
+            }
+
 
         }
+        #endregion
     }
 }
 
