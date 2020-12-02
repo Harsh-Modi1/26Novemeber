@@ -4,8 +4,8 @@ import { productservice } from '../services/productservice';
 import { Categories } from '../models/category.model';
 import { Products } from '../models/Products.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Image } from '../models/image.model';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-productcrud',
@@ -23,22 +23,49 @@ export class ProductcrudComponent implements OnInit {
   selectedFile = null;
   imageUrl: string = '/assets/images/download.png';
   fileToUpload: File = null;
-  productImages: Image[] = new Array<Image>();
+  productForm: FormGroup;
+  submitted: boolean = false;
   productFiles: File[] = new Array<File>();
-  constructor(private prodservice: productservice, private catservice: categoryservice, private modalService: NgbModal, private router: Router) { }
+
+  constructor(private prodservice: productservice, private catservice: categoryservice,
+    private modalService: NgbModal, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    debugger;
     let url = this.router.url;
     if (Number(url.split('/')[2]) != 0) {
       this.GetProductById(Number(url.split('/')[2]));
     }
     this.catservice.GetCategoryList().subscribe((response: any) => { this.categorylist = response; });
+
+    this.productForm = this.formBuilder.group({
+      productCode: ['', Validators.required],
+      productName: ['', Validators.required],
+      productDescription: ['', Validators.required],
+      brand: ['', Validators.required],
+      quantity: ['', [Validators.required, Validators.required]],
+      productPrice: ['', [Validators.required, Validators.required]],
+      categoryID: ['', [Validators.required, Validators.required]]
+    });
+
+  }
+  get f() { return this.productForm.controls; }
+
+  setQuantity() {
+    let quantityValue: any = this.prod.Quantity;
+    if (quantityValue <= 0 || quantityValue == 'e') {
+      alert("Please enter valid quantity.");
+      this.prod.Quantity = 1;
+    }
   }
 
   SaveProduct() {
+    this.submitted = true;
+    if (this.productForm.invalid) {
+      return;
+    }
     this.prod.RetailerID = Number(sessionStorage.getItem('userId'));
     this.prodservice.insertProduct(this.prod).subscribe((response: any) => {
+      this.submitted = false;
       if (response.Status == 'Success') {
         this.prod = new Products();
         if (this.productFiles.length > 0) {
@@ -49,36 +76,24 @@ export class ProductcrudComponent implements OnInit {
         }
       }
       else if (response = "Product Quantity should not be in Negative Number") {
-        alert('Product Quantity should not be in Negative Number');
+        alert(response);
       }
       else {
         this.error = response;
       }
-    });
+    }, (error) => { window.alert(error.error.Message); }
+    );
   }
 
   GetProductById(id) {
     this.prodservice.getProductbyid(id).subscribe((response: any) => {
       this.addUpdate = 'Update';
       this.prod = response;
-    });
+    }, (error) => { window.alert(error.error.Message); });
   }
 
   handleFileInput(file: FileList) {
-    debugger;
     this.fileToUpload = file.item(0);
-    // var image: Image = {
-    //   ImageID: 0,
-    //   IsDefault: false,
-    //   ProductID: this.prod.ProductID,
-    //   ProductImage: this.fileToUpload.name
-    // }
-    // this.productImages.push(image);
-    // var reader = new FileReader();
-    // reader.onload = (event: any) => {
-    //   this.imageUrl = event.target.result;
-    // };
-    // reader.readAsDataURL(this.fileToUpload);
     this.productFiles.push(this.fileToUpload);
   }
 

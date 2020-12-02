@@ -90,8 +90,6 @@ export class CartComponent implements OnInit {
       if (response == 'Success') {
         alert('Order Placed Succesfully');
         this.router.navigate(['home']);
-        // debugger;
-        // return this.handleRemoveFromCart(this.deletecartid);
       }
     });
   }

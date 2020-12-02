@@ -1,60 +1,140 @@
-<form>
+<form [formGroup]="productForm">
   <div class="row">
-    <div class="col-md-3">
-      <div class="form-group">
-        <label><b>Product Code</b></label>
-        <input type="text" name="ProductCode" [(ngModel)]="prod.ProductCode" #ProductCode=ngModel required />
-      </div>
-      <div *ngIf="ProductCode.invalid && (ProductCode.dirty || ProductCode.touched)"
-    class="alert alert-danger">
- 
-  <div *ngIf="ProductCode.errors.required">
-    Name is required.
-  </div>
+    <div class="col-md-2">
+      <label><b>Product Code</b></label>
     </div>
-    </div>
-    <div class="col-md-3">
-      <div class="form-group">
-        <label><b>Product Name</b></label>
-        <input type="text" name="ProductName" [(ngModel)]="prod.ProductName" />
+    <div class="col-md-4">
+      <input type="text" class="form-control" name="ProductCode" [(ngModel)]="prod.ProductCode"
+        formControlName="productCode" [ngClass]="{ 'is-invalid': submitted && f.productCode.errors }" />
+      <div *ngIf="submitted && f.productCode.errors" class="invalid-feedback">
+        <div *ngIf="f.productCode.errors.required"><small class="text-danger">Product Code is
+            required</small>
+        </div>
       </div>
     </div>
   </div>
-  <div class="form-group">
-    <label><b>Category Name</b></label>
-    <select name="CategoryID" [(ngModel)]="prod.CategoryID">
-      <option value="0">Select Category</option>
-      <option *ngFor="let Category of categorylist" value="{{Category.CategoryID}}">{{Category.CategoryName}}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label><b>Product Description</b></label>
-    <input type="text" name="ProductDescription" [(ngModel)]="prod.ProductDescription" />
-  </div>
-  <div class="form-group">
-    <label><b>Product Price</b></label>
-    <input type="text" name="ProductPrice" [(ngModel)]="prod.ProductPrice" />
-  </div>
-  <div class="form-group">
-    <label><b>Brand</b></label>
-    <input type="text" name="Brand" [(ngModel)]="prod.Brand" />
-  </div>
-  <div class="form-group">
-    <label><b>Quantity</b></label>
-    <input type="number" min=0 name="Quantity" [(ngModel)]="prod.Quantity" />
-  </div>
-  <!-- <div class="form-group">
-    <label><b>Stock</b></label>&nbsp;
-    <input type="radio" name="Instock" value="true" [(ngModel)]="prod.InStock" />&nbsp;InStock&nbsp;
-    <input type="radio" name="Outstock" value="false" [(ngModel)]="prod.InStock" />&nbsp;OutOfStock
-  </div> -->
+  <br />
 
-  <button class="btn btn-lg btn-outline-primary" style="margin-bottom: 20px;" (click)="open(content)">Add Product
-    Images</button>
+  <div class="row">
+    <div class="col-md-2">
+      <label><b>Product Name</b></label>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" name="ProductName" formControlName="productName"
+        [(ngModel)]="prod.ProductName" [ngClass]="{ 'is-invalid': submitted && f.productName.errors }" />
+      <div *ngIf="submitted && f.productName.errors" class="invalid-feedback">
+        <div *ngIf="f.productName.errors.required"><small class="text-danger">Product Name is
+            required</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
 
-  <div class="form-group">
-    <button (click)="SaveProduct()">{{addUpdate}} Product</button>
-    <button style="margin-left: 10px;" (click)="Cancel()">Cancel</button>
+  <div class="row">
+    <div class="col-md-2">
+      <label><b>Category Name</b></label>
+    </div>
+    <div class="col-md-4">
+      <select name="CategoryID" class="form-control" [(ngModel)]="prod.CategoryID" formControlName="categoryID">
+        <option value="0">Select Category</option>
+        <option *ngFor="let Category of categorylist" value="{{Category.CategoryID}}">{{Category.CategoryName}}
+        </option>
+      </select>
+      <div *ngIf="submitted && f.categoryID.errors" class="invalid-feedback">
+        <div *ngIf="f.categoryID.errors.required"><small class="text-danger">Category is
+            required</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-2">
+      <label><b>Product Description</b></label>
+    </div>
+    <div class="col-md-4">
+      <textarea class="form-control" name="ProductDescription" formControlName="productDescription"
+        [(ngModel)]="prod.ProductDescription"
+        [ngClass]="{ 'is-invalid': submitted && f.productDescription.errors }"></textarea>
+      <div *ngIf="submitted && f.productDescription.errors" class="invalid-feedback">
+        <div *ngIf="f.productDescription.errors.required"><small class="text-danger">Product Name is
+            required</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-2">
+      <label><b>Product Price</b></label>
+    </div>
+    <div class="col-md-4">
+      <input type="number" class="form-control" name="ProductPrice" formControlName="productPrice"
+        [(ngModel)]="prod.ProductPrice" [ngClass]="{ 'is-invalid': submitted && f.productPrice.errors }" />
+      <div *ngIf="submitted && f.productPrice.errors" class="invalid-feedback">
+        <div *ngIf="f.productPrice.errors.required"><small class="text-danger">Product Name is
+            required</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-2">
+      <label><b>Brand</b></label>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" name="Brand" formControlName="brand" [(ngModel)]="prod.Brand"
+        [ngClass]="{ 'is-invalid': submitted && f.brand.errors }" />
+      <div *ngIf="submitted && f.brand.errors" class="invalid-feedback">
+        <div *ngIf="f.brand.errors.required"><small class="text-danger">Product Name is
+            required</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-2">
+      <label><b>Quantity</b></label>
+    </div>
+    <div class="col-md-4">
+      <input type="number" class="form-control" min=1 name="Quantity" (focusout)="setQuantity()"
+        formControlName="quantity" [(ngModel)]="prod.Quantity"
+        [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }" />
+      <div *ngIf="submitted && f.quantity.errors" class="invalid-feedback">
+        <div *ngIf="f.quantity.errors.required"><small class="text-danger">Product Name is
+            required</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-4">
+      <a class="" href="javascript:void(0);" style="margin-bottom: 20px;" (click)="open(content)">Add Product
+        Images</a>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-warning" (click)="Cancel()">Cancel</button>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" (click)="SaveProduct()">{{addUpdate}} Product</button>
+    </div>
   </div>
 </form>
 
@@ -98,8 +178,8 @@
         <!-- <th style="width: 100px;">IsDefault</th> -->
       </tr>
 
-      <tr *ngFor="let p of productImages;let i=index">
-        <td style="width: 100px;">{{p.ProductImage}}</td>
+      <tr *ngFor="let p of productFiles;let i=index">
+        <td style="width: 100px;">{{p.name}}</td>
         <!-- <td style="width: 100px;"><img [src]="imageUrl" style="width: 130px; height: 130px;"></td> -->
         <!-- <td style="width: 100px;"><input type="checkbox" /></td> -->
       </tr>

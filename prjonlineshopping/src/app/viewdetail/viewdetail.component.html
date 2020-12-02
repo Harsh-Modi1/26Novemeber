@@ -28,8 +28,8 @@
                 <div class="product-details">
                     <h2 class="product-name">{{product.ProductName}}</h2>
                     <div>
-                        <h3 class="product-price">{{product.ProductPrice | currency:'INR':'symbol-narrow'}}</h3>
-                        <span class="product-available">In Stock &nbsp;{{product.InStock}}</span>
+                        <h3 class="product-price">{{product.ProductPrice}}₹</h3>
+                        <span class="product-available">In Stock : &nbsp;{{product.Quantity == 0 ? 'No' : 'Yes'}}</span>
                     </div><br />
                     <p>{{product.ProductDescription}}</p>
                     <p>{{product.Brand}} </p>
@@ -38,7 +38,7 @@
                         <input type="number" min="0" style="width: 80px;" [(ngModel)]="cartQuantity"
                             class="form-control">
                     </div>
-                    <div class="add-to-cart">
+                    <div *ngIf="product.Quantity != 0"  class="add-to-cart">
                         <button class="btn btn-sm btn-primary product-btn" style="margin-top: 10px;"
                             (click)="AddToCart(product)"><i class="glyphicon glyphicon-shopping-cart"></i> Add to
                             cart</button>

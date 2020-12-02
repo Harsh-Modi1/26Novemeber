@@ -13,6 +13,7 @@ export class RetailerviewComponent implements OnInit {
   registrationModel: RegistrationModel[];
   registration: RegistrationModel = new RegistrationModel();
   deleteUserId: number;
+  addUpdate: string = 'Add';
   constructor(private adminservice: Adminservice, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -24,7 +25,9 @@ export class RetailerviewComponent implements OnInit {
     });
   }
   GetRetailerById(id) {
+    debugger;
     this.adminservice.GetRetailerById(id).subscribe((response: any) => {
+      this.addUpdate = 'Update';
       this.registration = response;
     });
   }

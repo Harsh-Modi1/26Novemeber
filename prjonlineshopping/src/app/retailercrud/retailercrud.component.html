@@ -15,8 +15,8 @@
                     </div>
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" [(ngModel)]="registration.LastName" formControlName="lastName" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <input type="text" [(ngModel)]="registration.LastName" formControlName="lastName"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                         <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                             <div *ngIf="f.lastName.errors.required"><small class="text-danger">Last Name is
                                     required</small></div>
@@ -26,19 +26,22 @@
                         <label for="txtTech">Gender</label>
                         <div class="margin">
                             <div class="form-group">
-                                <input type="radio" [(ngModel)]="registration.Gender" id="male" name="gender" value="male" formControlName="gender">&nbsp;
+                                <input type="radio" [(ngModel)]="registration.Gender" id="male" name="gender"
+                                    value="male" formControlName="gender">&nbsp;
                                 <label for="male">Male</label>&nbsp;
-                                <input type="radio" [(ngModel)]="registration.Gender" id="female" name="gender" value="female" formControlName="gender">&nbsp;
+                                <input type="radio" [(ngModel)]="registration.Gender" id="female" name="gender"
+                                    value="female" formControlName="gender">&nbsp;
                                 <label for="female">Female</label>&nbsp;
-                                <input type="radio" [(ngModel)]="registration.Gender" id="other" name="gender" value="other" formControlName="gender">&nbsp;
+                                <input type="radio" [(ngModel)]="registration.Gender" id="other" name="gender"
+                                    value="other" formControlName="gender">&nbsp;
                                 <label for="other">Other</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Mobile No.</label>
-                        <input type="text" [(ngModel)]="registration.MobileNumber" formControlName="mobileNo" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+                        <input type="text" [(ngModel)]="registration.MobileNumber" formControlName="mobileNo"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
                         <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
                             <div *ngIf="f.mobileNo.errors.required"><small class="text-danger">Mobile Number is
                                     required</small></div>
@@ -53,18 +56,19 @@
                             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div *ngIf="registration.UserID == 0" class="form-group">
                         <label>Password</label>
-                        <input type="password" [(ngModel)]="registration.Password" formControlName="password" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <input type="password" [(ngModel)]="registration.Password" formControlName="password"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">Password is required</div>
                             <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div *ngIf="registration.UserID == 0" class="form-group">
                         <label>Confirm Password</label>
-                        <input type="password" [(ngModel)]="registration.ConfirmPassword" formControlName="confirmPassword" class="form-control"
+                        <input type="password" [(ngModel)]="registration.ConfirmPassword"
+                            formControlName="confirmPassword" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
                         <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                             <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
@@ -72,65 +76,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">{{addUpdate}}Register</button>
+                        <button type="submit" class="btn btn-primary">{{addUpdate}} Retailer</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<hr>
-<h3>Retailer Management</h3>
-<hr>
-<table>
-  <tr>
-    <th style="width: 50px;">Sr No.</th>
-    <th style="width: 100px;">Retailer ID</th>
-    <th style="width: 100px;">First Name</th>
-    <th style="width: 100px;">Last Name</th>
-    <th style="width: 100px;">Gender</th>
-    <th style="width: 150px;">MobileNo</th>
-    <th style="width: 100px;">Email ID</th>
-    <th style="width: 100px;">Role</th>
-    <th style="width: 100px;">Status</th>
-    <!-- <th style="width: 100px;">Password</th> -->
-    <th style="width: 100px;">Actions</th>
-  </tr>
-
-  <tr *ngFor="let r of registrationModel;let i=index">
-    <td style="width: 50px;">{{i + 1}}</td>
-    <td style="width: 100px;">{{r.UserID}}</td>
-    <td style="width: 100px;">{{r.FirstName}}</td>
-    <td style="width: 100px;">{{r.LastName}}</td>
-    <td style="width: 100px;">{{r.Gender}}</td>
-    <td style="width: 100px;">{{r.MobileNumber}}</td>
-    <td style="width: 100px;">{{r.Email}}</td>
-    <td style="width: 100px;">{{r.Role}}</td>
-    <td style="width: 100px;">{{r.Status}}</td>
-    <!-- <td style="width: 100px;">{{r.Password}}</td> -->
-    <td style="width: 200px;"><button (click)="GetRetailerById(r.UserID)">Edit</button> |
-      <button class="btn btn-danger" (click)="openDeletePopup(contentdelete, r.UserID);">Delete</button>
-    </td>
-  </tr>
-</table>
-
-<!-- Delete Popup Start -->
-<ng-template #contentdelete let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <p>Are you Sure you want to Delete?</p>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="DeleteProduct()">Ok</button>
-  </div>
-</ng-template>
-<!-- Delete Popup End -->
-

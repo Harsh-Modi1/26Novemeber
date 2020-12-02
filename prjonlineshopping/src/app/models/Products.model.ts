@@ -5,7 +5,7 @@ export class Products {
         this.ProductName = '';
         this.ProductDescription = '';
         this.Brand = '';
-        this.Quantity = 0;
+        this.Quantity = 1;
         this.ProductPrice = 0;
         this.InStock = true;
         this.CategoryID = 0;

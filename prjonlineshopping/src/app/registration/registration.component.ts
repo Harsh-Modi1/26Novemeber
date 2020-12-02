@@ -11,7 +11,7 @@ import { RegistrationService } from '../services/registration.service';
 export class RegistrationComponent implements OnInit {
   registrationModel: RegistrationModel = new RegistrationModel();
   registerForm: FormGroup;
-  submitted = false;
+  submitted: boolean = false;
   constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService) { }
 
   ngOnInit(): void {

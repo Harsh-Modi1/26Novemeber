@@ -1,6 +1,6 @@
 export class RegistrationModel {
     constructor() {
-        this.UserID = null;
+        this.UserID = 0;
         this.FirstName = '';
         this.LastName = '';
         this.Gender = '';

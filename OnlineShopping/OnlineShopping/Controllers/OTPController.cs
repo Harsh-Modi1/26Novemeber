@@ -93,6 +93,12 @@ namespace OnlineShopping.Controllers
                     var isOtpValid = db.OTPs.Where(w => w.OTP1 == changePasswordModel.OTP && w.UserID == user.UserID).FirstOrDefault();
                     if (isOtpValid != null)
                     {
+                        //Password Encryption Code
+                        byte[] encData_byte = new byte[changePasswordModel.Password.Length];
+                        encData_byte = System.Text.Encoding.UTF8.GetBytes(changePasswordModel.Password);
+                        string encodedpassword = Convert.ToBase64String(encData_byte);
+                        changePasswordModel.Password = encodedpassword;
+
                         user.Password = changePasswordModel.Password;
                         db.Entry(user).State = EntityState.Modified;
                         db.SaveChanges();

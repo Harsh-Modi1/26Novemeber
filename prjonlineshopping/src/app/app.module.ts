@@ -10,13 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductcrudComponent } from './productcrud/productcrud.component';
 import { productservice } from './services/productservice';
 import { categoryservice } from './services/category.service';
-import { HeaderComponent } from './components/shared/header/header.component';
 import { NavComponent } from './components/shared/nav/nav.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { CompareproductsComponent } from './compareproducts/compareproducts.component';
 import { ViewdetailComponent } from './viewdetail/viewdetail.component';
-import { UserprofileComponent } from './userprofile/userprofile.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RetailercrudComponent } from './retailercrud/retailercrud.component';
 import { AdminregistrationComponent } from './adminregistration/adminregistration.component';
@@ -39,7 +37,6 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     LoginComponent,
     RegistrationComponent,
     ProductcrudComponent,
-    HeaderComponent,
     NavComponent,
     FooterComponent,
     ProductListComponent,
@@ -47,7 +44,6 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     ForgotpasswordComponent,
     CompareproductsComponent,
     ViewdetailComponent,
-    UserprofileComponent,
     WishlistComponent,
     RetailercrudComponent,
     AdminregistrationComponent,

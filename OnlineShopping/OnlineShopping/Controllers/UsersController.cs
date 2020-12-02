@@ -41,6 +41,14 @@ namespace OnlineShopping.Controllers
                         userTable.Email = register.Email;
                         userTable.MobileNumber = register.MobileNumber;
                         userTable.Password = register.Password;
+
+                        //Password Encryption Code
+                        byte[] encData_byte = new byte[userTable.Password.Length];
+                        encData_byte = System.Text.Encoding.UTF8.GetBytes(userTable.Password);
+                        string encodedpassword = Convert.ToBase64String(encData_byte);
+                        userTable.Password = encodedpassword;
+
+
                         userTable.CreatedOn = DateTime.Now;
                         userTable.Role = register.Role;
                         userTable.Status = "";
@@ -76,6 +84,12 @@ namespace OnlineShopping.Controllers
                 {
                     return BadRequest(ModelState);
                 }
+                //Password Encryption Code
+                byte[] encData_byte = new byte[password.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
+                string encodedpassword = Convert.ToBase64String(encData_byte);
+                password = encodedpassword;
+
                 var isValidUser = false;
                 var user = db.UserTables.Where(w => w.Email == email && w.Password == password && (w.Role == "User" || w.Role == "Retailer")).FirstOrDefault();
                 if (user != null)

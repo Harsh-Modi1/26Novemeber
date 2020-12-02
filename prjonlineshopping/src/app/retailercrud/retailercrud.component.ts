@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../mustmatch';
 import { RegistrationModel } from '../models/registration-model';
 import { RegistrationService } from '../services/registration.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Adminservice } from '../services/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-retailercrud',
@@ -18,11 +18,7 @@ export class RetailercrudComponent implements OnInit {
   deleteUserId: number;
   addUpdate: string = 'Add';
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService,
-              private modalService: NgbModal, private adminservice: Adminservice) { }
-
-  ngOnInit(): void {
-    this.GetRetailer();
+  constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService, private adminservice: Adminservice, private router: Router) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -35,6 +31,13 @@ export class RetailercrudComponent implements OnInit {
       { validator: MustMatch('password', 'confirmPassword') }
     );
   }
+
+  ngOnInit(): void {
+    let url = this.router.url;
+    if (Number(url.split('/')[2]) != 0) {
+      this.GetRetailerById(Number(url.split('/')[2]));
+    }
+  }
   get f() { return this.registerForm.controls; }
 
   onSubmit(model) {
@@ -46,41 +49,23 @@ export class RetailercrudComponent implements OnInit {
     model.Role = 'Retailer';
     this.registrationService.Register(model).subscribe((response: any) => {
       this.submitted = false;
-      alert('Retailer Registered Succesfully');
-      this.registration = new RegistrationModel();
-      if (response.IsValid) {
-
+      if (response == "Success") {
+        alert('Retailer Registered Succesfully');
+        this.registration = new RegistrationModel();
+        window.location.href = 'admin';
+      }
+      else {
+        alert(response);
       }
     });
-
   }
 
-  GetRetailer() {
-    this.adminservice.GetRetailer().subscribe((data: any) => {
-      this.registrationModel = data;
-    });
-  }
   GetRetailerById(id) {
-    debugger;
     this.adminservice.GetRetailerById(id).subscribe((response: any) => {
+      debugger;
       this.addUpdate = 'Update';
       this.registration = response;
+      this.registration.ConfirmPassword = this.registration.Password;
     });
   }
-  DeleteConfirmation(id) {
-    this.deleteUserId = id;
-  }
-
-  DeleteProduct() {
-    debugger;
-    this.adminservice.DeleteRetailer(this.deleteUserId).subscribe((response: any) => {
-      this.GetRetailer();
-      alert('Retailer Removed Successfully');
-    });
-  }
-  openDeletePopup(contentdelete, id) {
-    this.deleteUserId = id;
-    this.modalService.open(contentdelete);
-  }
-
 }

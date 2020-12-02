@@ -41,6 +41,7 @@ export class AdminregistrationComponent implements OnInit {
       this.submitted = false;
       alert("Admin Registered Successfully.");
       this.registrationModel = new RegistrationModel();
+      window.location.href = 'admin/login';
     });
   }
 }

@@ -12,14 +12,14 @@ import { RetailerviewComponent } from './retailerview/retailerview.component';
 import { RetailerdashboardComponent } from './retailerdashboard/retailerdashboard.component';
 import { CartComponent } from './components/shared/cart/cart.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
-// import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+
 import { ProductmanagementComponent } from './productmanagement/productmanagement.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 import { AdminregistrationComponent } from './adminregistration/adminregistration.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
-
+// import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: ProductListComponent },
@@ -31,15 +31,15 @@ const routes: Routes = [
   { path: 'viewdetail/:id', component: ViewdetailComponent },
   { path: 'compare', component: CompareproductsComponent },
   { path: 'wishlist', component: WishlistComponent },
-  { path: 'retailercrud', component: RetailercrudComponent },
+  { path: 'retailercrud/:id', component: RetailercrudComponent },
   { path: 'retailerview', component: RetailerviewComponent },
   { path: 'retailerdashboard', component: RetailerdashboardComponent },
-  // {path: '**', component: PagenotfoundComponent},
   { path: 'productmanagement', component: ProductmanagementComponent },
   { path: 'myorders', component: MyOrdersComponent },
   { path: 'admin', component: AdmindashboardComponent },
   { path: 'admin/register', component: AdminregistrationComponent },
-  { path: 'admin/login', component: AdminloginComponent }
+  { path: 'admin/login', component: AdminloginComponent },
+  // {path: '**', component: PagenotfoundComponent},
 ];
 
 @NgModule({

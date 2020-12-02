@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Products } from '../models/Products.model';
 import { productservice } from '../services/productservice';
 import { Router } from '@angular/router';
-import { CartModel } from '../models/Cart.model';
 
 @Component({
   selector: 'app-viewdetail',
