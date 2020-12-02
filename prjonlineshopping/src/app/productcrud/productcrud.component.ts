@@ -28,7 +28,7 @@ export class ProductcrudComponent implements OnInit {
   productFiles: File[] = new Array<File>();
 
   constructor(private prodservice: productservice, private catservice: categoryservice,
-    private modalService: NgbModal, private router: Router, private formBuilder: FormBuilder) { }
+              private modalService: NgbModal, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     let url = this.router.url;

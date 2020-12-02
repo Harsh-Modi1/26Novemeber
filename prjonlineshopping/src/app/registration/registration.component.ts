@@ -35,8 +35,6 @@ export class RegistrationComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    // model.Role = 'User';
-    debugger;
     this.registrationService.Register(model).subscribe((response: any) => {
       this.submitted = false;
       if (response == "Success") {

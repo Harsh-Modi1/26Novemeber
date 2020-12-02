@@ -18,7 +18,8 @@ export class RetailercrudComponent implements OnInit {
   deleteUserId: number;
   addUpdate: string = 'Add';
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService, private adminservice: Adminservice, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService,
+              private adminservice: Adminservice, private router: Router) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -41,7 +42,6 @@ export class RetailercrudComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit(model) {
-    debugger;
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
@@ -62,7 +62,6 @@ export class RetailercrudComponent implements OnInit {
 
   GetRetailerById(id) {
     this.adminservice.GetRetailerById(id).subscribe((response: any) => {
-      debugger;
       this.addUpdate = 'Update';
       this.registration = response;
       this.registration.ConfirmPassword = this.registration.Password;

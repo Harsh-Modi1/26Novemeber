@@ -16,10 +16,6 @@ export class ProductmanagementComponent implements OnInit {
   deleteProductId: number;
   selectedFile = null;
   imagePath: string = 'https://localhost:44324/';
-  // imageUrl: string = '/assets/images/download.png';
-  // fileToUpload: File = null;
-  // mdlSampleIsOpen: boolean = false;
-  // productImages: Image[] = new Array<Image>();
 
   constructor(private prodservice: productservice, private modalService: NgbModal) { }
 
@@ -32,6 +28,23 @@ export class ProductmanagementComponent implements OnInit {
     });
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   DeleteConfirmation(id) {
     this.deleteProductId = id;
   }
@@ -49,39 +62,7 @@ export class ProductmanagementComponent implements OnInit {
     });
   }
 
-  // handleFileInput(file: FileList) {
-  //   debugger;
-  //   this.fileToUpload = file.item(0);
-  //   var image: Image = {
-  //     ImageID: 0,
-  //     IsDefault: false,
-  //     ProductID: this.prod.ProductID,
-  //     ProductImage: this.fileToUpload.name
-  //   }
-  //   this.productImages.push(image);
-  //   var reader = new FileReader();
-  //   reader.onload = (event: any) => {
-  //     this.imageUrl = event.target.result;
-  //   };
-  //   reader.readAsDataURL(this.fileToUpload);
-  // }
 
-  // SaveImages() {
-  //   debugger;
-  //   this.prodservice.insertProductImage(this.productImages, this.prod.ProductID, true).subscribe((response: any) => {
-  //     if (response == 'Success') {
-  //       alert('ProductImage Saved Succesfully');
-  //       var reader = new FileReader();
-  //       reader.onload = (event: any) => {
-  //         this.imageUrl = event.target.result;
-  //       };
-  //       reader.readAsDataURL(this.fileToUpload);
-  //     }
-  //     else {
-  //       this.error = response;
-  //     }
-  //   });
-  // }
 
   open(content) {
     this.modalService.open(content);

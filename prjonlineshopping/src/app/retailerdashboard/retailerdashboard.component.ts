@@ -25,6 +25,14 @@ export class RetailerdashboardComponent implements OnInit {
     });
   }
 
+
+
+
+
+
+
+
+  
   DeleteConfirmation(id) {
     this.deleteProductId = id;
   }

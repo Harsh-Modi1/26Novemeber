@@ -6,10 +6,6 @@ import { Categories } from '../models/category.model';
 export class categoryservice {
     constructor(private http: HttpClient) { }
 
-    // getcategorylist(){
-    //     return this.http.get('https://localhost:44324/api/Categories').toPromise();
-    // }
-
     GetCategoryList() {
         return this.http.get('https://localhost:44324/api/Categories');
     }

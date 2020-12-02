@@ -17,24 +17,11 @@ export class productservice {
         return this.http.get('https://localhost:44324/api/RetailersProduct/GetProductsByRetailerId?retailerId=' + retailerId);
     }
 
-    Product(model) {
-        return this.http.post('https://localhost:44324/api/Products/', model);
-    }
-
     insertProduct(prod) {
         return this.http.post(this.uri, prod);
     }
 
     insertProductImage(fileToUploads, productId, isDefault) {
-        // const formDataObj: FormData[] = new Array<FormData>();
-        // fileToUploads.forEach(fileToUpload => {
-        //     const formData: FormData = new FormData();
-        //     formData.append('Name', fileToUpload.name);
-        //     formData.append('Image', fileToUpload);
-        //     formData.append('ProductId', productId);
-        //     formData.append('IsDefault', isDefault);
-        //     formDataObj.push(formData);
-        // });
         const formData = new FormData();
 
         formData.append('ProductId', productId);

@@ -3,12 +3,12 @@ import { RegistrationModel } from '../models/registration-model';
 import { Adminservice } from '../services/admin.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
 @Component({
   selector: 'app-retailerview',
   templateUrl: './retailerview.component.html',
   styleUrls: ['./retailerview.component.css']
 })
+
 export class RetailerviewComponent implements OnInit {
   registrationModel: RegistrationModel[];
   registration: RegistrationModel = new RegistrationModel();
@@ -25,7 +25,6 @@ export class RetailerviewComponent implements OnInit {
     });
   }
   GetRetailerById(id) {
-    debugger;
     this.adminservice.GetRetailerById(id).subscribe((response: any) => {
       this.addUpdate = 'Update';
       this.registration = response;
@@ -36,10 +35,9 @@ export class RetailerviewComponent implements OnInit {
   }
 
   DeleteProduct() {
-    debugger;
     this.adminservice.DeleteRetailer(this.deleteUserId).subscribe((response: any) => {
-      this.GetRetailer();
-      alert("Retailer Removed Successfully")
+      alert("Retailer Removed Successfully");
+      window.location.reload();
     });
   }
   openDeletePopup(contentdelete, id) {

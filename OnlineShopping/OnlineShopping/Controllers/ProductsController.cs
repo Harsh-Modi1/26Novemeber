@@ -63,18 +63,7 @@ namespace OnlineShopping.Controllers
                 {
                     if (product.ProductID == 0)
                     {
-                        if (product.Quantity < 0)
-                        {
-                            return Ok("Product Quantity should not be in Negative Number");
-                        }
-                        else if (product.Quantity == 0)
-                        {
-                            product.InStock = false;
-                        }
-                        else
-                        {
-                            product.InStock = true;
-                        }
+                        product.InStock = true;
                         product.CreatedDate = DateTime.Now;
                         db.Products.Add(product);
                         db.SaveChanges();
@@ -91,32 +80,21 @@ namespace OnlineShopping.Controllers
                             productData.CategoryID = product.CategoryID;
                             productData.Quantity = product.Quantity;
                             productData.ProductPrice = product.ProductPrice;
-                            if (product.Quantity < 0)
-                            {
-                                return Ok("Product Quantity should not be in Negative Number");
-                            }
-                            else if (product.Quantity == 0)
-                            {
-                                productData.Quantity = product.Quantity;
-                                productData.InStock = false;
-                            }
-                            else
-                            {
-                                productData.Quantity = product.Quantity;
-                                productData.InStock = true;
-                            }
-                            // productData.InStock = product.InStock;
                             productData.ModifiedDate = DateTime.Now;
 
                             db.Entry(productData).State = EntityState.Modified;
                             db.SaveChanges();
+                        }
+                        else
+                        {
+                            return Ok(new { Status = "Product not found." });
                         }
                     }
 
                     return Ok(new { ProductId = product.ProductID, Status = "Success" });
                 }
                 else
-                    return Ok("Product Code Already Exists.");
+                    return Ok(new { Status = "Product Code Already Exists." });
 
             }
             catch (Exception e)
